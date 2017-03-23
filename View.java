@@ -11,14 +11,10 @@ public class View {
 		this.controller = controller;
 
 	}
-
-	public void update(Object arg) {
-		System.out.println("View      : object passed is " + arg.getClass());
-		// then do stuff with arg here
-	}
-
+	
 	public void update(ViewState state) {
 		// this would fire when the input does not have to be restricted
+		System.out.println("update() called with new view state " + state.name());
 	}
 
 	public void update(ViewState state, Card card) {
