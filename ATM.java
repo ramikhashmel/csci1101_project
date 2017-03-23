@@ -13,16 +13,11 @@ public class ATM {
 		controller.addModel(model);
 		view.addController(controller);
 
-		boolean isDebitCard = UserInput.getBoolean("Type 1 for credit card, and 0 if not: ");
 		Account acc = new Account();
 		String cardNumber = UserInput.getString("Card Number: ", Restrictions.getCCNumberRestriction());
 
-		Card card = null;
-		if (isDebitCard) {
-			//card = new DebitCard();
-		} else {
-			card = new CreditCard();
-		}
+		Card card = new Card();
+		card.setNumber(Integer.parseInt(cardNumber));
 
 		String pin = UserInput.getString("PIN: ", Restrictions.getPinRestriction());
 

@@ -62,4 +62,8 @@ public class Card {
 	public void setPin(int pin) {
 		this.pin = pin;
 	}
+	public void setNumber(int cardNumber) {
+		this.cardNumber = cardNumber;
+		
+	}
 }
