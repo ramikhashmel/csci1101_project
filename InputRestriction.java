@@ -28,8 +28,13 @@ public class InputRestriction {
 	 */
 	public InputRestrictionResult checkConformity(String input) {
 		InputRestrictionResult result = new InputRestrictionResult();
-		if ((minLength == null || (input.length() >= minLength)) && (maxLength == null || (input.length() <= maxLength))) {
-			if (shouldBeNumeric && (input.replaceAll("[0-9]", "").length() == input.length())) {
+		if ((minLength == null || (input.length() >= minLength))
+				&& (maxLength == null || (input.length() <= maxLength))) {
+			if (shouldBeNumeric) {
+				if (input.replaceAll("[^0-9]", "").length() == input.length()) {
+					result.setDoesConform(true);
+				}
+			} else {
 				result.setDoesConform(true);
 			}
 		}
