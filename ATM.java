@@ -17,6 +17,8 @@ public class ATM {
 		view.addController(controller);
 
 		controller.initialize();
+		
+		controller.updateView();
 	}
 
 }

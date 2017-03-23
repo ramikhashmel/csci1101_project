@@ -35,4 +35,9 @@ public class View {
 	public void userPressedEnter() {
 		// get the data from the controller
 	}
+
+	public void update() {
+		// TODO Auto-generated method stub
+		// refreshes the view with new data that it now has access to
+	}
 }

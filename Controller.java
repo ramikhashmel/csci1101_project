@@ -70,4 +70,8 @@ public class Controller {
 			view.update(ViewState.CARD_INVALID, result);
 		}
 	}
+
+	public void updateView() {
+		view.update();
+	}
 }
