@@ -9,7 +9,10 @@ public class Restrictions {
 	}
 
 	public static InputRestriction getPinRestriction() {
-		// TODO Auto-generated method stub
-		return null;
+		InputRestriction pinRestriction = new InputRestriction();
+		pinRestriction.setShouldBeNumeric(true);
+		pinRestriction.setMaxLength(4);
+		pinRestriction.setMinLength(4);
+		return pinRestriction;
 	}
 }
