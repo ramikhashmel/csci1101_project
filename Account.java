@@ -68,4 +68,9 @@ public class Account {
 	public void setPhoneNumber(Phone phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+
+	public int getCashLimitRemaining() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
