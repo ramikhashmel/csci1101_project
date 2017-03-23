@@ -14,10 +14,10 @@ public class ATM {
 		view.addController(controller);
 
 		Account acc = new Account();
-		String cardNumber = UserInput.getString("Card Number: ", null);
+		String cardNumber = UserInput.getString("Card Number: ", Restrictions.getCCNumberRestriction());
 
 		Card card = new Card();
-		card.setNumber(Integer.parseInt(cardNumber));
+		card.setNumber(cardNumber);
 
 		String pin = UserInput.getString("PIN: ", Restrictions.getPinRestriction());
 

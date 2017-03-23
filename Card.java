@@ -1,5 +1,5 @@
 public class Card {
-	private int cardNumber;
+	private String cardNumber;
 	private String institution;
 
 	private int cvv;
@@ -12,14 +12,14 @@ public class Card {
 	public Card() {
 
 	}
-	public Card(int cardNumber, int cvv, int pin, String cardholderName) {
+	public Card(String cardNumber, int cvv, int pin, String cardholderName) {
 		this.cardNumber = cardNumber;
 		this.cvv = cvv;
 		this.pin = pin;
 		this.cardholderName = cardholderName;
 	}
 
-	public int getCardNumber() {
+	public String getCardNumber() {
 		return cardNumber;
 	}
 
@@ -62,7 +62,8 @@ public class Card {
 	public void setPin(int pin) {
 		this.pin = pin;
 	}
-	public void setNumber(int cardNumber) {
+	
+	public void setNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
 		
 	}
