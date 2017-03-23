@@ -6,14 +6,20 @@
  */
 
 public class CustomerReceipt extends Receipt {
+
 	public CustomerReceipt() {
 
 	}
 
+	// would never have full access to the card object
+	// not necessary
+	public int lastFourDigitsOfCard() {
+		return 0;
+	}
+
 	@Override
 	public String toString() {
-		return "Here's your receipt:\n" + super.toString()
-				+ "\nPrinted on: <date today>\nThank you for using "
+		return "Here's your receipt:\n" + super.toString() + "\nPrinted on: <date today>\nThank you for using "
 				+ Utilities.ATMName;
 
 	}

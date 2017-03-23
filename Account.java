@@ -1,11 +1,11 @@
 public class Account {
 	private int balance;
-	private int cardNumber;
 	private int accountNumber;
 	private int depositNum;
 	private String name;
 	private String address;
 	private Phone phoneNumber;
+	private Card card;
 
 	public int getAccountNumber() {
 		return accountNumber;
@@ -19,8 +19,8 @@ public class Account {
 		return balance;
 	}
 
-	public int getCardNumber() {
-		return cardNumber;
+	public Card getCard() {
+		return card;
 	}
 
 	public int getDepositNum() {
@@ -35,6 +35,11 @@ public class Account {
 		return phoneNumber;
 	}
 
+	public boolean isValidCard() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	public void setAccountNumber(int accountNumber) {
 		this.accountNumber = accountNumber;
 	}
@@ -47,8 +52,9 @@ public class Account {
 		this.balance = balance;
 	}
 
-	public void setCardNumber(int cardNumber) {
-		this.cardNumber = cardNumber;
+	public void setCard(Card card2) {
+		// TODO Auto-generated method stub
+
 	}
 
 	public void setDepositNum(int depositNum) {

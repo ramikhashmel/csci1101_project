@@ -1,9 +1,23 @@
 public class Card {
 	private int cardNumber;
 	private String institution;
-	private int expMonth;
-	private int expYear;
+
 	private int cvv;
+	private int pin;
+
+	private boolean isDebit;
+
+	private String cardholderName;
+
+	public Card() {
+
+	}
+	public Card(int cardNumber, int cvv, int pin, String cardholderName) {
+		this.cardNumber = cardNumber;
+		this.cvv = cvv;
+		this.pin = pin;
+		this.cardholderName = cardholderName;
+	}
 
 	public int getCardNumber() {
 		return cardNumber;
@@ -13,35 +27,39 @@ public class Card {
 		return (cvv + "");
 	}
 
-	public int getExpMonth() {
-		return expMonth;
-	}
-
-	public int getExpYear() {
-		return expYear;
-	}
-
 	public String getInstitution() {
 		return institution;
 	}
 
-	public void setCardNumber(int cardNumber) {
-		this.cardNumber = cardNumber;
+	public String getName() {
+		return cardholderName;
+	}
+
+	public int getPin() {
+		return pin;
+	}
+
+	public boolean isDebit() {
+		return isDebit;
 	}
 
 	public void setCvv(int cvv) {
 		this.cvv = cvv;
 	}
 
-	public void setExpMonth(int expMonth) {
-		this.expMonth = expMonth;
-	}
-
-	public void setExpYear(int expYear) {
-		this.expYear = expYear;
+	public void setDebit(boolean isDebit) {
+		this.isDebit = isDebit;
 	}
 
 	public void setInstitution(String institution) {
 		this.institution = institution;
+	}
+
+	public void setName(String cardholderName) {
+		this.cardholderName = cardholderName;
+	}
+
+	public void setPin(int pin) {
+		this.pin = pin;
 	}
 }

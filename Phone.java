@@ -9,8 +9,7 @@ public class Phone {
 	}
 
 	public boolean equals(Phone otherPhone) {
-		return (otherPhone.getUnformattedPhoneNumber().equals(this
-				.getUnformattedPhoneNumber()));
+		return (otherPhone.getUnformattedPhoneNumber().equals(this.getUnformattedPhoneNumber()));
 	}
 
 	/**
@@ -29,8 +28,7 @@ public class Phone {
 	 */
 	public boolean isValid() {
 		// e.g. 555-5555, 902-555-5555, or 1-902-555-5555
-		return ((phoneNumber.length() == 7) || (phoneNumber.length() == 10) || (phoneNumber
-				.length() == 11));
+		return ((phoneNumber.length() == 7) || (phoneNumber.length() == 10) || (phoneNumber.length() == 11));
 	}
 
 	/**
@@ -38,8 +36,7 @@ public class Phone {
 	 * 
 	 * @param shouldAssumeCanadianCountryCode
 	 */
-	public void setShouldAssumeCanadianCountryCode(
-			boolean shouldAssumeCanadianCountryCode) {
+	public void setShouldAssumeCanadianCountryCode(boolean shouldAssumeCanadianCountryCode) {
 		this.shouldAssumeCanadianCountryCode = shouldAssumeCanadianCountryCode;
 	}
 
@@ -61,14 +58,11 @@ public class Phone {
 		case 7: // e.g. 555-5555
 			return phoneNumber.substring(0, 3) + "-" + phoneNumber.substring(3);
 		case 10:
-			return "(" + phoneNumber.substring(0, 3) + ") "
-					+ phoneNumber.substring(3, 6) + "-"
+			return "(" + phoneNumber.substring(0, 3) + ") " + phoneNumber.substring(3, 6) + "-"
 					+ phoneNumber.substring(6);
 		case 11:
-			return "+" + phoneNumber.substring(0, 1) + " ("
-					+ phoneNumber.substring(1, 4) + ") "
-					+ phoneNumber.substring(4, 7) + "-"
-					+ phoneNumber.substring(7);
+			return "+" + phoneNumber.substring(0, 1) + " (" + phoneNumber.substring(1, 4) + ") "
+					+ phoneNumber.substring(4, 7) + "-" + phoneNumber.substring(7);
 		default:
 			return phoneNumber;
 		}

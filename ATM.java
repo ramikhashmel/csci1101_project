@@ -3,53 +3,8 @@ import java.util.Scanner;
 public class ATM {
 	static Scanner kb = new Scanner(System.in);
 
-	/**
-	 * Asks the user for any input. Warning: this can include any value,
-	 * including an empty string or null
-	 * 
-	 * @param string
-	 *            The message to ask the user when they input a value
-	 * @return The value input by the user.
-	 */
-	private static String askUserForInput(String string) {
-		return askUserForInput(string, new InputRestriction(
-				InputRestriction.NoRestriction));
-	}
-
-	/**
-	 * Asks the user for input, with a restriction
-	 * 
-	 * @param msg
-	 *            The message to ask the user
-	 * @param restriction
-	 *            The restriction which is placed on the input
-	 * @return The input from the user, which satisfies the restriction
-	 */
-	public static String askUserForInput(String msg,
-			InputRestriction restriction) {
-
-		String input = null;
-		do {
-			System.out.print(msg);
-			input = kb.nextLine();
-		} while (restriction.checkConformity(input).didSucceed());
-
-		return input;
-	}
-
-	/**
-	 * Asks the user for a number
-	 * 
-	 * @param msg
-	 *            The message to ask the user
-	 * @return The number from the user
-	 */
-	public static float askUserForNumber(String msg) {
-		System.out.print(msg);
-		return kb.nextFloat();
-	}
-
-	public static void main(String[] args) {
+	// entry point
+	public static void main(String[] args) throws Exception {
 		View view = new View();
 		Model model = new Model();
 		Controller controller = new Controller();
@@ -58,13 +13,28 @@ public class ATM {
 		controller.addModel(model);
 		view.addController(controller);
 
-		InputRestriction cardNumberRestriction = new InputRestriction();
-		cardNumberRestriction.setShouldBeNumeric(true);
-		cardNumberRestriction.setMaxLength(16);
-		cardNumberRestriction.setMinLength(16);
+		boolean isDebitCard = UserInput.getBoolean("Type 1 for credit card, and 0 if not: ");
+		Account acc = new Account();
+		String cardNumber = UserInput.getString("Card Number: ", Restrictions.getCCNumberRestriction());
 
-		String cardNumber = askUserForInput("Card Number: ",
-				cardNumberRestriction);
-		String pin = askUserForInput("PIN: ");
+		Card card = null;
+		if (isDebitCard) {
+			//card = new DebitCard();
+		} else {
+			card = new CreditCard();
+		}
+
+		String pin = UserInput.getString("PIN: ", Restrictions.getPinRestriction());
+
+		InputRestrictionResult result = null;
+		ViewState state = new ViewState();
+
+		if (model.isValidCard(card)) {
+			view.update(ViewState.CARD_VALID, result);
+			view.update(ViewState.CARD_WITHDRAW_OR_DEPOSIT);
+		} else {
+			view.update(ViewState.CARD_INVALID, result);
+		}
 	}
+
 }

@@ -8,6 +8,10 @@ public class Receipt {
 		transactions.add(transaction);
 	}
 
+	public int getLastFourDigits() {
+		return 0;
+	}
+
 	// default toString but we need to override it
 	@Override
 	public String toString() {

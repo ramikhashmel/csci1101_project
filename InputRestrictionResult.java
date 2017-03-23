@@ -9,10 +9,6 @@ public class InputRestrictionResult {
 		return doesConform();
 	}
 
-	public boolean doesConform() {
-		return doesConform;
-	}
-
 	public String getErrorMessage() {
 		if (errorMessage != null) {
 			return errorMessage;
@@ -35,5 +31,9 @@ public class InputRestrictionResult {
 
 	public void setShouldDisplayErrorMessage(boolean shouldDisplayErrorMessage) {
 		this.shouldDisplayErrorMessage = shouldDisplayErrorMessage;
+	}
+
+	public boolean doesConform() {
+		return doesConform;
 	}
 }

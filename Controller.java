@@ -2,6 +2,8 @@ public class Controller {
 	Bank bank;
 	private View view;
 	private Model model;
+	CustomerReceipt custReceipt = new CustomerReceipt();
+	InternalReceipt internReceipt = new InternalReceipt();
 
 	public void addModel(Model model) {
 		this.model = model;
@@ -18,11 +20,6 @@ public class Controller {
 	}
 
 	public boolean checkExpiryDate() {
-		return false;
-
-	}
-
-	public boolean checkSum() {
 		return false;
 
 	}

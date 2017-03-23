@@ -1,4 +1,11 @@
+// TODO: convert to enums
 public class ViewState {
+	public static final ViewState CARD_VALID = null;
+	public static final ViewState CARD_WITHDRAW_OR_DEPOSIT = null;
+	public static final ViewState CARD_INVALID = null;
+	// these should all be set to random numbers, but each state
+	// has to be a different number unless they are the same state
+	public int VALID_CARD_SCREEN = 1;
 	// when someone turns it on
 	public int STARTING_UP;
 
@@ -6,7 +13,7 @@ public class ViewState {
 	public int WELCOME_SCREEN_PUBLIC;
 
 	// the card number is invalid
-	public int INVALID_CARD_NUMBER;
+	public int INVALID_CARD_NUMBER = 2;
 
 	// user entered in the wrong pin
 	public int INVALID_PIN;
@@ -23,8 +30,7 @@ public class ViewState {
 	// there is no money in the user's account
 	public int NO_MONEY_IN_ACCOUNT;
 
-	// the user's account is frozen
-	public int ACCOUNT_FROZEN;
+	// the user's account is frozenm public int ACCOUNT_FROZEN;
 
 	// when the user inserts their card into the machine
 	public int WELCOME_SCREEN_CARD_AUTH;

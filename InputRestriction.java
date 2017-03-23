@@ -28,11 +28,8 @@ public class InputRestriction {
 	 */
 	public InputRestrictionResult checkConformity(String input) {
 		InputRestrictionResult result = new InputRestrictionResult();
-		if (minLength == null || (input.length() >= minLength)
-				&& maxLength == null || (input.length() <= maxLength)) {
-			if (shouldBeNumeric
-					&& (input.replaceAll("[0-9]", "").length() == input
-							.length())) {
+		if ((minLength == null || (input.length() >= minLength)) && (maxLength == null || (input.length() <= maxLength))) {
+			if (shouldBeNumeric && (input.replaceAll("[0-9]", "").length() == input.length())) {
 				result.setDoesConform(true);
 			}
 		}
@@ -43,17 +40,22 @@ public class InputRestriction {
 			return result;
 		} else {
 			result.setErrorMessage(errorMsg);
+			result.setDoesConform(false);
 			return result;
 		}
+	}
+
+	public void isNumeric() {
+		// TODO Auto-generated method stub
 	}
 
 	public void setErrorMsg(String errorMsg) {
 		this.errorMsg = errorMsg;
 	}
 
-	public void setExactLength(int min, int max) {
-		this.maxLength = max;
-		this.minLength = min;
+	public void setExactLength(int finalLen) {
+		this.maxLength = finalLen;
+		this.minLength = finalLen;
 	}
 
 	public void setMaxLength(int maxLength) {
@@ -67,4 +69,5 @@ public class InputRestriction {
 	public void setShouldBeNumeric(boolean shouldBeNumeric) {
 		this.shouldBeNumeric = shouldBeNumeric;
 	}
+
 }
