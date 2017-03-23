@@ -14,7 +14,7 @@ public class ATM {
 		view.addController(controller);
 
 		Account acc = new Account();
-		String cardNumber = UserInput.getString("Card Number: ", Restrictions.getCCNumberRestriction());
+		String cardNumber = UserInput.getString("Card Number: ", null);
 
 		Card card = new Card();
 		card.setNumber(Integer.parseInt(cardNumber));

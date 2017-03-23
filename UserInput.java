@@ -75,7 +75,10 @@ public class UserInput {
 		do {
 			System.out.print(msg);
 			input = ATM.kb.nextLine();
-		} while (restriction == null || !restriction.checkConformity(input).didSucceed());
+			if (restriction == null) {
+				break;
+			}
+		} while (!restriction.checkConformity(input).didSucceed());
 
 		return input;
 	}
