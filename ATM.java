@@ -27,7 +27,6 @@ public class ATM {
 		String pin = UserInput.getString("PIN: ", Restrictions.getPinRestriction());
 
 		InputRestrictionResult result = null;
-		ViewState state = new ViewState();
 
 		// if it's valid, continue otherwise abort
 		if (model.isValidCard(card)) {
