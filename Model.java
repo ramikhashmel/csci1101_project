@@ -38,10 +38,10 @@ public class Model {
 	}
 
 	public boolean checkIfPossibleToWithdraw(Account acc, int userWithdrawAmount) {
-		int numOfFives = Vault.getNumberOfFives();
-		int numOfTens = Vault.getNumberOfTens();
-		int numOfTwenties = Vault.getNumberOfTwenties();
-		int numOfFifties = Vault.getNumberOfFifties();
+		int numOfFives = Vault.getFives();
+		int numOfTens = Vault.getTens();
+		int numOfTwenties = Vault.getTwenties();
+		int numOfFifties = Vault.getFifties();
 
 		int runningWithdraw = userWithdrawAmount;
 		int currentPossibleWithdrawAmount = 0;
@@ -53,11 +53,10 @@ public class Model {
 			// take out round(v) instead
 			return false;
 		} else if (totalVaultValue < runningWithdraw) {
-			// atm doesn’t have enough money; you can only withdraw “r” dollars
+			// atm doesn't have enough money
 			return false;
 		} else if (runningWithdraw > cashLimit) {
-			// you don’t have a high enough daily withdrawal limit; you can only
-			// withdraw “s” dollars
+			// you don't have a high enough daily withdrawal limit
 			return false;
 		} else {
 			if ((runningWithdraw % 50) <= numOfFifties) {
@@ -82,11 +81,10 @@ public class Model {
 				
 				return true;
 			} else if (runningWithdraw > 0) {
-				// user cannot withdraw that exact amount, however they can get
-				// out “r” dollars
+				// user cannot withdraw that exact amount, however they can get out a certain amount
 				return false; // ish
 			} else {
-				// there’s no money left in the ATM, or a fatal calculation
+				// there's no money left in the ATM, or a fatal calculation
 				// error occurred
 				
 				return false;

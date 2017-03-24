@@ -1,29 +1,45 @@
+// TODO: make the vault values more realistic and remember to update them
+// when money is withdrawn
 
 public class Vault {
-
-	public static int getNumberOfFives() {
-		// TODO Auto-generated method stub
-		return 0;
+	private static int fives = 10;
+	private static int tens = 10;
+	private static int twenties = 10;
+	private static int fifties = 10;
+	
+	public static int getFifties() {
+		return fifties;
 	}
 
-	public static int getNumberOfTens() {
-		// TODO Auto-generated method stub
-		return 0;
+	public static int getFives() {
+		return fives;
 	}
 
-	public static int getNumberOfTwenties() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public static int getNumberOfFifties() {
-		// TODO Auto-generated method stub
-		return 0;
+	public static int getTens() {
+		return tens;
 	}
 
 	public static int getTotal() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (getFives() + getTens() + getTwenties() + getFifties());
 	}
 
+	public static int getTwenties() {
+		return twenties;
+	}
+
+	public void setFifties(int fifties) {
+		Vault.fifties = fifties;
+	}
+
+	public void setFives(int fives) {
+		Vault.fives = fives;
+	}
+
+	public void setTens(int tens) {
+		Vault.tens = tens;
+	}
+
+	public void setTwenties(int twenties) {
+		Vault.twenties = twenties;
+	}
 }
