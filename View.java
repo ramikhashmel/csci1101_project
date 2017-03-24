@@ -1,7 +1,8 @@
 //http://www.austintek.com/mvc/#austintek_mvc.view_2
 
 public class View {
-	private Controller controller;
+	Controller controller;
+	Card card;
 
 	public View() {
 		// initializes the GUI window; attaches buttons to methods
@@ -12,6 +13,19 @@ public class View {
 
 	}
 	
+	public Card getCard() {
+		return card;
+	}
+
+	public void setCard(Card card) {
+		this.card = card;
+	}
+
+	public void update() {
+		// TODO Auto-generated method stub
+		// refreshes the view with new data that it now has access to
+	}
+
 	public void update(ViewState state) {
 		// this would fire when the input does not have to be restricted
 		System.out.println("update() called with new view state " + state.name());
@@ -36,8 +50,31 @@ public class View {
 		// get the data from the controller
 	}
 
-	public void update() {
-		// TODO Auto-generated method stub
-		// refreshes the view with new data that it now has access to
+	/**
+	 * @param model
+	 */
+	public void askUserForCard() {
+		card = new Card();
+		
+		update(ViewState.WELCOME_SCREEN_CARD_AUTH);
+		
+		// create new account, and ask user for a card number
+		String cardNumber = UserInput.getString("Card Number: ", Restrictions.getCCNumberRestriction());
+		
+		card.setNumber(cardNumber);
+	
+		// get pin, and try to validate the card
+		String pin = UserInput.getString("PIN: ", Restrictions.getPinRestriction());
+		card.setPin(pin);
+		
+		InputRestrictionResult result = null;
+	
+		// if it's valid, continue otherwise abort
+		if (getCard() != null && controller.model.isValidCard(getCard())) {
+			update(ViewState.CARD_VALID, result);
+			update(ViewState.CARD_WITHDRAW_OR_DEPOSIT);
+		} else {
+			update(ViewState.CARD_INVALID, result);
+		}
 	}
 }
