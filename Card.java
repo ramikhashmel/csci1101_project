@@ -3,7 +3,7 @@ public class Card {
 	private String institution;
 
 	private int cvv;
-	private int pin;
+	private String pin;
 
 	private boolean isDebit;
 
@@ -12,7 +12,7 @@ public class Card {
 	public Card() {
 
 	}
-	public Card(String cardNumber, int cvv, int pin, String cardholderName) {
+	public Card(String cardNumber, int cvv, String pin, String cardholderName) {
 		this.cardNumber = cardNumber;
 		this.cvv = cvv;
 		this.pin = pin;
@@ -35,7 +35,7 @@ public class Card {
 		return cardholderName;
 	}
 
-	public int getPin() {
+	public String getPin() {
 		return pin;
 	}
 
@@ -59,8 +59,8 @@ public class Card {
 		this.cardholderName = cardholderName;
 	}
 
-	public void setPin(int pin) {
-		this.pin = pin;
+	public void setPin(String string) {
+		this.pin = string;
 	}
 	
 	public void setNumber(String cardNumber) {
