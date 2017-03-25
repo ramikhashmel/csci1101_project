@@ -4,11 +4,6 @@ public class InputRestrictionResult {
 
 	private String errorMessage;
 
-	public boolean didSucceed() {
-		// TODO Auto-generated method stub
-		return doesConform();
-	}
-
 	public String getErrorMessage() {
 		if (errorMessage != null) {
 			return errorMessage;

@@ -78,7 +78,7 @@ public class UserInput {
 			if (restriction == null) {
 				break;
 			}
-		} while (!restriction.checkConformity(input).didSucceed());
+		} while (!restriction.checkConformity(input).doesConform());
 
 		return input;
 	}
