@@ -38,11 +38,6 @@ public class Controller {
 
 	}
 
-	public boolean validateCard() {
-		return false;
-
-	}
-
 	public void writeTransactionToFile(Transaction trans) {
 	}
 
