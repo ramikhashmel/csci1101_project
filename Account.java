@@ -53,8 +53,7 @@ public class Account {
 	}
 
 	public void setCard(Card card2) {
-		// TODO Auto-generated method stub
-
+		this.card = card2;
 	}
 
 	public void setDepositNum(int depositNum) {
