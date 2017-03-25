@@ -4,7 +4,8 @@ public class Model {
 	ArrayList<Card> cards = new ArrayList<Card>();
 	int balance;
 	private Controller controller;
-
+	private Vault vault = new Vault();
+	
 	public Model() {
 		// read the credit card numbers from the file
 	}
@@ -90,5 +91,9 @@ public class Model {
 				return false;
 			}
 		}
+	}
+
+	public Vault getVault() {
+		return vault;
 	}
 }

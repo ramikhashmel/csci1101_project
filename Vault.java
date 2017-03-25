@@ -42,4 +42,9 @@ public class Vault {
 	public void setTwenties(int twenties) {
 		Vault.twenties = twenties;
 	}
+
+	public boolean withdraw(double amount) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

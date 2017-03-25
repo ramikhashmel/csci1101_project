@@ -24,8 +24,12 @@ public class Controller {
 
 	}
 
-	public void dispenseCash() {
-
+	public void dispenseCash(double amount) {
+		if (model.getVault().withdraw(amount)) {
+			view.update(ViewState.WITHDRAW_SUCCESS);
+		} else {
+			view.update(ViewState.WITHDRAW_ERROR);
+		}
 	}
 
 	public boolean enoughDigits() {
