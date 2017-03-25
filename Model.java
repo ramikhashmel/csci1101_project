@@ -96,4 +96,9 @@ public class Model {
 	public Vault getVault() {
 		return vault;
 	}
+
+	public void openOutputDrawer() {
+		// TODO Auto-generated method stub
+		
+	}
 }

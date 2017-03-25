@@ -27,6 +27,9 @@ public class Controller {
 	public void dispenseCash(double amount) {
 		if (model.getVault().withdraw(amount)) {
 			view.update(ViewState.WITHDRAW_SUCCESS);
+			model.openOutputDrawer();
+			// wait a few seconds
+			model.closeOutputDrawer();
 		} else {
 			view.update(ViewState.WITHDRAW_ERROR);
 		}
