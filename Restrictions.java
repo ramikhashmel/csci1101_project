@@ -4,7 +4,11 @@
  * only allows four numbers.
  */
 public class Restrictions {
-	static public InputRestriction getCCNumberRestriction() {
+	/*
+	 * The input restriction for asking the user for their card number
+	 * (has to be exactly 16 digits)
+	 */
+	static public InputRestriction CCNumber() {
 		InputRestriction cardNumberRestriction = new InputRestriction();
 		cardNumberRestriction.setShouldBeNumeric(true);
 		cardNumberRestriction.setMaxLength(16);
@@ -12,7 +16,11 @@ public class Restrictions {
 		return cardNumberRestriction;
 	}
 
-	public static InputRestriction getPinRestriction() {
+	/*
+	 * Input restriction for asking the user for their pin
+	 * (has to be exactly four digits)
+	 */
+	static public InputRestriction pin() {
 		InputRestriction pinRestriction = new InputRestriction();
 		pinRestriction.setShouldBeNumeric(true);
 		pinRestriction.setMaxLength(4);

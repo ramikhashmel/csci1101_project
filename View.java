@@ -59,12 +59,12 @@ public class View {
 		update(ViewState.WELCOME_SCREEN_CARD_AUTH);
 		
 		// create new account, and ask user for a card number
-		String cardNumber = UserInput.getString("Card Number: ", Restrictions.getCCNumberRestriction());
+		String cardNumber = UserInput.getString("Card Number: ", Restrictions.CCNumber());
 		
 		card.setNumber(cardNumber);
 	
 		// get pin, and try to validate the card
-		String pin = UserInput.getString("PIN: ", Restrictions.getPinRestriction());
+		String pin = UserInput.getString("PIN: ", Restrictions.pin());
 		card.setPin(pin);
 		
 		InputRestrictionResult result = null;
