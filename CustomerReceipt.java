@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /*
  * Prints out the receipt to the user, includes last four digits of CC number, and 
  * very generalized information. Does not include whether or not any bills were
@@ -5,22 +7,23 @@
  * Also thanks the customer for using the ATM.
  */
 
-public class CustomerReceipt extends Receipt {
+public class CustomerReceipt {
+	ArrayList<CustomerTransaction> transactions = new ArrayList<CustomerTransaction>();
 
-	public CustomerReceipt() {
-
-	}
-
-	// would never have full access to the card object
-	// not necessary
-	public int lastFourDigitsOfCard() {
-		return 0;
+	public void addTransaction(CustomerTransaction transaction) {
+		transactions.add(transaction);
 	}
 
 	@Override
 	public String toString() {
-		return "Here's your receipt:\n" + super.toString() + "\nPrinted on: <date today>\nThank you for using "
-				+ Utilities.ATMName;
+		StringBuilder sb = new StringBuilder();
+		sb.append("Here's your receipt:\n");
+		for (int i = 0; i < transactions.size(); i++) {
+			sb.append(transactions.get(i).toString());
+		}
 
+		sb.append("\nPrinted on: <date today>\nThank you for using "
+				+ Utilities.ATMName);
+		return sb.toString();
 	}
 }
