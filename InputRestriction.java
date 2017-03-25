@@ -50,8 +50,8 @@ public class InputRestriction {
 		}
 	}
 
-	public void isNumeric() {
-		// TODO Auto-generated method stub
+	public void mustBeNumeric() {
+		this.shouldBeNumeric = true;
 	}
 
 	public void setErrorMsg(String errorMsg) {
