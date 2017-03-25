@@ -26,7 +26,7 @@ public class InputRestriction {
 	 *            The input
 	 * @return The results of the input conformity audit
 	 */
-	public InputRestrictionResult checkConformity(String input) {
+	InputRestrictionResult checkConformity(String input) {
 		InputRestrictionResult result = new InputRestrictionResult();
 		if ((minLength == null || (input.length() >= minLength))
 				&& (maxLength == null || (input.length() <= maxLength))) {
@@ -73,6 +73,42 @@ public class InputRestriction {
 
 	public void setShouldBeNumeric(boolean shouldBeNumeric) {
 		this.shouldBeNumeric = shouldBeNumeric;
+	}
+
+	public class InputRestrictionResult {
+		private boolean doesConform = false;
+		private boolean shouldDisplayErrorMessage = true;
+
+		private String errorMessage;
+
+		public String getErrorMessage() {
+			if (errorMessage != null) {
+				return errorMessage;
+			} else {
+				return "The input does not meet the specified requirements.";
+			}
+		}
+
+		public boolean isShouldDisplayErrorMessage() {
+			return shouldDisplayErrorMessage;
+		}
+
+		public void setDoesConform(boolean doesConform) {
+			this.doesConform = doesConform;
+		}
+
+		public void setErrorMessage(String errorMessage) {
+			this.errorMessage = errorMessage;
+		}
+
+		public void setShouldDisplayErrorMessage(
+				boolean shouldDisplayErrorMessage) {
+			this.shouldDisplayErrorMessage = shouldDisplayErrorMessage;
+		}
+
+		public boolean doesConform() {
+			return doesConform;
+		}
 	}
 
 }
