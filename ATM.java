@@ -2,7 +2,12 @@ import java.util.Scanner;
 
 public class ATM {
 	static Scanner kb = new Scanner(System.in);
-
+	private static String atmID = "0078P";
+	
+	public static String getID() {
+		return atmID;
+	}
+	
 	// entry point
 	public static void main(String[] args) throws Exception {
 		
