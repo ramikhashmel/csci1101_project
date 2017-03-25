@@ -1,4 +1,8 @@
-
+/*
+ * This class provides common restrictions for keyboard input. For example,
+ * the credit card restriction only allows 16 numbers. The pin restriction
+ * only allows four numbers.
+ */
 public class Restrictions {
 	static public InputRestriction getCCNumberRestriction() {
 		InputRestriction cardNumberRestriction = new InputRestriction();
