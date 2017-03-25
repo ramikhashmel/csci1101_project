@@ -4,8 +4,8 @@ public class Account {
 	private int depositNum;
 	private String name;
 	private String address;
-	private Phone phoneNumber;
 	private Card card;
+	private String phoneNumber;
 
 	public int getAccountNumber() {
 		return accountNumber;
@@ -31,7 +31,7 @@ public class Account {
 		return name;
 	}
 
-	public Phone getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
@@ -65,7 +65,7 @@ public class Account {
 		this.name = name;
 	}
 
-	public void setPhoneNumber(Phone phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
