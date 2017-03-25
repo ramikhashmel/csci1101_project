@@ -10,15 +10,6 @@ public class InputRestriction {
 	private Integer minLength = null;
 	private String errorMsg = null;
 
-	public InputRestriction() {
-
-	}
-
-	// TODO: clean up null reference implementation
-	public InputRestriction(Object obj) {
-
-	}
-
 	/**
 	 * Checks whether or not the input conforms to the restrictions
 	 * 
@@ -50,27 +41,44 @@ public class InputRestriction {
 		}
 	}
 
-	public void mustBeNumeric() {
-		this.shouldBeNumeric = true;
-	}
-
+	/**
+	 * The error message to return if the user did not enter
+	 * in the right data
+	 * @param errorMsg
+	 */
 	public void setErrorMsg(String errorMsg) {
 		this.errorMsg = errorMsg;
 	}
 
-	public void setExactLength(int finalLen) {
-		this.maxLength = finalLen;
-		this.minLength = finalLen;
+	/**
+	 * Forces the input to be a certain length; otherwise
+	 * an error occurs and the user must reinput their value
+	 * @param exactLen The exact length of the text
+	 */
+	public void setExactLength(int exactLen) {
+		this.maxLength = exactLen;
+		this.minLength = exactLen;
 	}
 
+	/**
+	 * The maximum length of the text
+	 * @param maxLength The max length of the text (in characters)
+	 */
 	public void setMaxLength(int maxLength) {
 		this.maxLength = maxLength;
 	}
 
+	/**
+	 * The minimum length of the text
+	 * @param minLength The minimum length of the text (in characters)
+	 */
 	public void setMinLength(int minLength) {
 		this.minLength = minLength;
 	}
 
+	/**
+	 * @param shouldBeNumeric
+	 */
 	public void setShouldBeNumeric(boolean shouldBeNumeric) {
 		this.shouldBeNumeric = shouldBeNumeric;
 	}
@@ -89,6 +97,9 @@ public class InputRestriction {
 			}
 		}
 
+		/*
+		 * Whether or not to display the error message
+		 */
 		public boolean isShouldDisplayErrorMessage() {
 			return shouldDisplayErrorMessage;
 		}
