@@ -7,6 +7,35 @@ public class Card {
 
 	private boolean isDebit;
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Card other = (Card) obj;
+		if (cardNumber == null) {
+			if (other.cardNumber != null)
+				return false;
+		} else if (!cardNumber.equals(other.cardNumber))
+			return false;
+		if (cardholderName == null) {
+			if (other.cardholderName != null)
+				return false;
+		} else if (!cardholderName.equals(other.cardholderName))
+			return false;
+		if (cvv != other.cvv)
+			return false;
+		if (institution == null) {
+			if (other.institution != null)
+				return false;
+		} else if (!institution.equals(other.institution))
+			return false;
+		return true;
+	}
+
 	private String cardholderName;
 
 	public Card() {
@@ -19,6 +48,10 @@ public class Card {
 		this.cardholderName = cardholderName;
 	}
 
+	public Card(String string) {
+		this.cardNumber = string;
+	}
+	
 	public String getCardNumber() {
 		return cardNumber;
 	}

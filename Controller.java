@@ -3,7 +3,6 @@ public class Controller {
 	View view;
 	Model model;
 	CustomerReceipt custReceipt = new CustomerReceipt();
-	InternalReceipt internReceipt = new InternalReceipt();
 
 	public void addModel(Model model) {
 		this.model = model;

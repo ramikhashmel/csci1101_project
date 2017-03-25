@@ -8,6 +8,7 @@ public class Model {
 	
 	public Model() {
 		// read the credit card numbers from the file
+		cards.add(new Card("1234567812341234"));
 	}
 
 	public void addController(Controller controller) {
@@ -27,6 +28,11 @@ public class Model {
 	}
 
 	public boolean isValidCard(Card card) {
+		for (int i = 0; i < cards.size(); i++) {
+			if (card.equals(cards.get(i))) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -49,7 +55,7 @@ public class Model {
 		int totalVaultValue = Vault.getTotal();
 		int cashLimit = acc.getCashLimitRemaining();
 
-		if (runningWithdraw != Math.round(runningWithdraw)) {
+		if (runningWithdraw != (int)runningWithdraw) {
 			// tell user that they cannot withdraw coins, and that they have to
 			// take out round(v) instead
 			return false;
