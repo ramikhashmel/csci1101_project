@@ -15,15 +15,6 @@ public class Controller {
 
 	}
 
-	public boolean checkCardLength() {
-		return true;
-	}
-
-	public boolean checkExpiryDate() {
-		return false;
-
-	}
-
 	public void dispenseCash(double amount) {
 		if (model.getVault().withdraw(amount)) {
 			view.update(ViewState.WITHDRAW_SUCCESS);
@@ -33,16 +24,6 @@ public class Controller {
 		} else {
 			view.update(ViewState.WITHDRAW_ERROR);
 		}
-	}
-
-	public boolean enoughDigits() {
-		return false;
-
-	}
-
-	public boolean enoughMoneyInMachine() {
-		return false;
-
 	}
 
 	public void writeTransactionToFile(Transaction trans) {
