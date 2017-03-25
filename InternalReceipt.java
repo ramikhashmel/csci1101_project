@@ -5,7 +5,7 @@
  * processing, and how much was dispensed. Does not thank the customer
  * because there is no customer to thank for the internal receipt.
  */
-public class InternalReceipt extends Receipt {
+public class InternalReceipt {
 
 	public InternalReceipt() {
 		// TODO Auto-generated constructor stub
