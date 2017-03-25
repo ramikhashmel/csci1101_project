@@ -101,4 +101,9 @@ public class Model {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void closeOutputDrawer() {
+		// TODO Auto-generated method stub
+		
+	}
 }
