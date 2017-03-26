@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /*
  * This class allows restrictions to be placed on user input so that
  * the program receives valid data.
@@ -9,6 +11,7 @@ public class InputRestriction {
 	private Integer maxLength = null;
 	private Integer minLength = null;
 	private String errorMsg = null;
+	private ArrayList<String> options = new ArrayList<String>();
 
 	/**
 	 * Checks whether or not the input conforms to the restrictions
@@ -19,6 +22,16 @@ public class InputRestriction {
 	 */
 	InputRestrictionResult checkConformity(String input) {
 		InputRestrictionResult result = new InputRestrictionResult();
+		
+		// if options are set, make sure that the text is contained
+		// within one of them
+		if (options.size() != 0) {
+			if (!options.contains(input)) {
+				result.setDoesConform(false);
+				return result;
+			}
+		}
+		
 		if ((minLength == null || (input.length() >= minLength))
 				&& (maxLength == null || (input.length() <= maxLength))) {
 			if (shouldBeNumeric) {
@@ -83,6 +96,25 @@ public class InputRestriction {
 		this.shouldBeNumeric = shouldBeNumeric;
 	}
 
+	/**
+	 * Only allows the user to enter in a certain option
+	 * @param options The list of options the user can choose from.
+	 */
+	public void setOptions(ArrayList<String> options) {
+		if (options.size() > 1) {
+			this.options  = options;
+		} else {
+			System.out.println("Options not set. Min length is two.");
+		}
+	}
+	
+	/**
+	 * Removes all options
+	 */
+	public void clearOptions() {
+		this.options.clear();
+	}
+	
 	public class InputRestrictionResult {
 		private boolean doesConform = false;
 		private boolean shouldDisplayErrorMessage = true;
