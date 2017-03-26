@@ -10,8 +10,9 @@ public class Bill {
 	public Bill(int amount) {
 		this.amount = amount;
 		serialNumber = Utilities.randNumber(100000, 10000000);
+		
 		// a 10% chance the bill is torn
-		if (Utilities.randNumber(1, 10) == 5) {
+		if (Utilities.randProbability(0.1)) {
 			this.isTorn = true;
 		}
 	}
