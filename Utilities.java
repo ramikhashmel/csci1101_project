@@ -22,4 +22,18 @@ public abstract class Utilities {
 	static public int randNumber(int min, int max) {
 		return rand.nextInt(max) + min;
 	}
+	
+	/**
+	 * Returns true based the desired probability
+	 * @param prob The probability to return true
+	 * @return 
+	 */
+	static public boolean randProbability(double prob) {
+		// http://stackoverflow.com/questions/11701399/
+		// round to three decimal places; multiply to remove decimal
+		double percentProb = (double) Math.round(prob * 1000)/10;
+		
+		return Utilities.randNumber(0, 100) <= Math.round(percentProb);
+		
+	}
 }
