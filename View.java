@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 //http://www.austintek.com/mvc/#austintek_mvc.view_2
 
 public class View {
@@ -36,7 +38,14 @@ public class View {
 
 	private void handleWithdrawOrDepositScreen() {
 		System.out.println("Hello, " + getCard().getName() + "!");
-		String userInput = UserInput.getString("Deposit or withdraw?", null);
+		InputRestriction depositOrWithdraw = new InputRestriction();
+		
+		ArrayList<String> options = new ArrayList<String>();
+		options.add("withdraw");
+		options.add("deposit");
+		
+		depositOrWithdraw.setOptions(options);
+		String userInput = UserInput.getString("Deposit or withdraw?", depositOrWithdraw);
 	}
 
 	public void update(ViewState state, InputRestrictionResult result) {
