@@ -1,7 +1,7 @@
 import java.util.Random;
 
 // this is for the view class as well
-public class Utilities {
+public abstract class Utilities {
 	static Random rand = new Random();
 	public static final boolean isDebugging = true;
 	public static final String ATMName = "Brand New ATM";

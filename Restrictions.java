@@ -3,7 +3,7 @@
  * the credit card restriction only allows 16 numbers. The pin restriction
  * only allows four numbers.
  */
-public class Restrictions {
+public abstract class Restrictions {
 	/*
 	 * The input restriction for asking the user for their card number
 	 * (has to be exactly 16 digits)
