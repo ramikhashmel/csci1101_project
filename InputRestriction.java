@@ -11,6 +11,7 @@ public class InputRestriction {
 	private Integer maxLength = null;
 	private Integer minLength = null;
 	private String errorMsg = null;
+	private boolean ignoreWhitespace = true;
 	private ArrayList<String> options = new ArrayList<String>();
 
 	/**
@@ -22,6 +23,10 @@ public class InputRestriction {
 	 */
 	InputRestrictionResult checkConformity(String input) {
 		InputRestrictionResult result = new InputRestrictionResult();
+		
+		if (shouldIgnoreWhitespace()) {
+			input = input.trim();
+		}
 		
 		// if options are set, make sure that the text is contained
 		// within one of them
@@ -115,6 +120,14 @@ public class InputRestriction {
 		this.options.clear();
 	}
 	
+	public boolean shouldIgnoreWhitespace() {
+		return ignoreWhitespace;
+	}
+
+	public void setShouldIgnoreWhitespace(boolean ignoreWhitespace) {
+		this.ignoreWhitespace = ignoreWhitespace;
+	}
+
 	public class InputRestrictionResult {
 		private boolean doesConform = false;
 		private boolean shouldDisplayErrorMessage = true;
