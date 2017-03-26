@@ -1,11 +1,11 @@
 import java.util.Date;
 
 public class Bill {
-	int amount;
-	String currency;
-	int serialNumber;
-	boolean isTorn;
-	Date dateIssued;
+	private int amount;
+	private String currency;
+	private int serialNumber;
+	private boolean isTorn;
+	private Date dateIssued;
 
 	public int getAmount() {
 		return amount;
