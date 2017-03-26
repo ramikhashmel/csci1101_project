@@ -77,10 +77,10 @@ public class Model {
 			// get the data from the vault and see how many of each denomination
 			// we have
 			Map<Integer, Integer> denominationsAvailable = new HashMap<Integer, Integer>();
-			denominationsAvailable.put(50, Vault.getFifties());
-			denominationsAvailable.put(20, Vault.getTwenties());
-			denominationsAvailable.put(10, Vault.getTens());
-			denominationsAvailable.put(5, Vault.getFives());
+			denominationsAvailable.put(50, Vault.getNumOfFifties());
+			denominationsAvailable.put(20, Vault.getNumOfTwenties());
+			denominationsAvailable.put(10, Vault.getNumOfTens());
+			denominationsAvailable.put(5, Vault.getNumOfFives());
 
 			int runningWithdraw = userWithdrawAmount;
 
