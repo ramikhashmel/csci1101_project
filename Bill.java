@@ -7,6 +7,15 @@ public class Bill {
 	private boolean isTorn;
 	private Date dateIssued;
 
+	public Bill(int amount) {
+		this.amount = amount;
+		
+		// a 10% chance the bill is torn
+		if (Utilities.randNumber(1, 10) == 5) {
+			this.isTorn = true;
+		}
+	}
+	
 	public int getAmount() {
 		return amount;
 	}
