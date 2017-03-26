@@ -20,7 +20,7 @@ public class UserInput {
 			truthValues.addAll(Arrays.asList("true", "yes", "confirm", "positive", "t", "tr", "tru"));
 
 			ArrayList<String> falseValues = new ArrayList<String>();
-			falseValues.addAll(Arrays.asList("false", "no", "cancel", "incorrect", "f", "fa", "fal", "fals"));
+			falseValues.addAll(Arrays.asList("false", "no", "cancel", "incorrect", "f", "fa", "fal", "fals", "exit", "quit"));
 
 			if (truthValues.contains(userInput)) {
 				return true;
