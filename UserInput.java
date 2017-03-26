@@ -24,7 +24,7 @@ public class UserInput {
 
 			if (truthValues.contains(userInput)) {
 				return true;
-			} else if (truthValues.contains(userInput)) {
+			} else if (falseValues.contains(userInput)) {
 				return false;
 			}
 		}
