@@ -24,6 +24,9 @@ public class Bill {
 	}
 
 	public int getSerialNumber() {
+		if (serialNumber == 0) {
+			serialNumber = Utilities.randNumber(100000, 10000000);
+		}
 		return serialNumber;
 	}
 }
