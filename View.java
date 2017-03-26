@@ -24,6 +24,19 @@ public class View {
 	public void update(ViewState state) {
 		// this would fire when the input does not have to be restricted
 		System.out.println("update() called with new view state " + state.name());
+		
+		switch (state) {
+		case CARD_WITHDRAW_OR_DEPOSIT:
+			handleWithdrawOrDepositScreen();
+			break;
+		default:
+			break;
+		}
+	}
+
+	private void handleWithdrawOrDepositScreen() {
+		System.out.println("Hello, " + getCard().getName() + "!");
+		String userInput = UserInput.getString("Deposit or withdraw?", null);
 	}
 
 	public void update(ViewState state, InputRestrictionResult result) {

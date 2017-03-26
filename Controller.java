@@ -28,10 +28,6 @@ public class Controller {
 	public void writeTransactionToFile(Transaction trans) {
 	}
 
-	public void updateView() {
-		view.update();
-	}
-
 	/**
 	 * @param view
 	 * @param model
