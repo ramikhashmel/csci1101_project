@@ -25,6 +25,10 @@ public class Bill {
 		return currency;
 	}
 
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
 	public Date getDateIssued() {
 		return dateIssued;
 	}
