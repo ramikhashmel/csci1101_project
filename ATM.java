@@ -15,13 +15,14 @@ public class ATM {
 		View view = new View();
 		Model model = new Model();
 		Controller controller = new Controller();
-
+		
 		// register them with each other
 		controller.addView(view);
 		controller.addModel(model);
 		view.addController(controller);
-
+		
 		controller.initialize();
+		View.initialize(args);
 	}
 
 }

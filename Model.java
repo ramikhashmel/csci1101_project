@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Model {
+	private static boolean isAuthenticated;
 	ArrayList<Card> cards = new ArrayList<Card>();
 	int balance;
 	private Controller controller;
@@ -137,5 +138,13 @@ public class Model {
 	public void closeOutputDrawer() {
 		// TODO Auto-generated method stub
 
+	}
+
+	public static void setAuthenticated(boolean b) {
+		isAuthenticated = b;	
+	}
+
+	public static boolean isAuthenticated() {
+		return isAuthenticated;
 	}
 }

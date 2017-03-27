@@ -25,6 +25,18 @@ public class Controller {
 		}
 	}
 
+	public ViewEventResult verifyCCNumber(String ccNumber, String pin) {
+		Card card = new Card();
+		card.setNumber(ccNumber);
+		card.setPin(pin);
+		
+		if (model.isValidCard(card)) {
+			return new ViewEventResult(true, "Card is valid");
+		} else {
+			return new ViewEventResult(false, "Card is invalid, try again.");
+		}
+	}
+	
 	public void writeTransactionToFile(Transaction trans) {
 	}
 
@@ -40,6 +52,5 @@ public class Controller {
 
 	public void initialize() {
 		view.askUserForCard();
-		
 	}
 }
