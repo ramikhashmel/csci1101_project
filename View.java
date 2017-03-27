@@ -28,7 +28,7 @@ public class View {
 		System.out.println("update() called with new view state " + state.name());
 		
 		switch (state) {
-		case CARD_WITHDRAW_OR_DEPOSIT:
+		case CARD_AUTHENTICATED:
 			handleWithdrawOrDepositScreen();
 			break;
 		default:
@@ -83,7 +83,7 @@ public class View {
 		// if it's valid, continue otherwise abort
 		if (getCard() != null && controller.model.isValidCard(getCard())) {
 			update(ViewState.CARD_VALID, result);
-			update(ViewState.CARD_WITHDRAW_OR_DEPOSIT);
+			update(ViewState.CARD_AUTHENTICATED);
 		} else {
 			update(ViewState.CARD_INVALID, result);
 		}
