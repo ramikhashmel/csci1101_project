@@ -54,7 +54,9 @@ final class AuthenticationScreen implements EventHandler<ActionEvent> {
 			// card is invalid
 			cardNumberField.clear();
 			pinField.clear();
-			actiontarget.setText(event.getMessage());
+			if (event.getMessage() != null) {
+				actiontarget.setText(event.getMessage());
+			}
 			Model.setAuthenticated(false);
 			return false;
 		} else {
