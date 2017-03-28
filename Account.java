@@ -6,6 +6,7 @@ public class Account {
 	private String address;
 	private Card card;
 	private String phoneNumber;
+   	private int limit;
 
 	public int getAccountNumber() {
 		return accountNumber;
@@ -33,11 +34,6 @@ public class Account {
 
 	public String getPhoneNumber() {
 		return phoneNumber;
-	}
-
-	public boolean isValidCard() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	public void setAccountNumber(int accountNumber) {
@@ -68,7 +64,11 @@ public class Account {
 		this.phoneNumber = phoneNumber;
 	}
 
+   	public void setCashLimit(int limit) {
+      		this.limit = limit;
+   	}
+   
 	public int getCashLimitRemaining() {
-		return 200;
+		return limit;
 	}
 }
