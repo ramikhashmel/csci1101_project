@@ -13,12 +13,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-final class AuthenticationScreen implements EventHandler<ActionEvent> {
+final class MainMenu implements EventHandler<ActionEvent> {
 	private final TextField cardNumberField;
 	private final PasswordField pinField;
 	private final Text actiontarget;
 
-	AuthenticationScreen(TextField cardNumberField, PasswordField pinField, Text actiontarget) {
+	MainMenu(TextField cardNumberField, PasswordField pinField, Text actiontarget) {
 		this.cardNumberField = cardNumberField;
 		this.pinField = pinField;
 		this.actiontarget = actiontarget;
@@ -30,7 +30,7 @@ final class AuthenticationScreen implements EventHandler<ActionEvent> {
 	
 		if (Model.isAuthenticated()) {
 			Stage primaryStage = View.primaryStage;
-			primaryStage.setTitle("Withdraw");
+			primaryStage.setTitle(Utilities.ATMName + " - Menu");
 
 			GridPane grid = new GridPane();
 			grid.setAlignment(Pos.CENTER);
@@ -43,10 +43,10 @@ final class AuthenticationScreen implements EventHandler<ActionEvent> {
 			BorderPane border = new BorderPane();
 			border.setPadding(new Insets(20, 0, 20, 20));
 
-			Button btnAdd = new Button("Func 1");
-			Button btnDelete = new Button("Func 2");
-			Button btnMoveUp = new Button("Func 3");
-			Button btnMoveDown = new Button("Func 4");
+			Button btnAdd = new Button("Withdraw");
+			Button btnDelete = new Button("Check Balance");
+			Button btnMoveUp = new Button("Fast Cash");
+			Button btnMoveDown = new Button("Transfer");
 
 			btnAdd.setMaxWidth(Double.MAX_VALUE);
 			btnDelete.setMaxWidth(Double.MAX_VALUE);
@@ -62,7 +62,7 @@ final class AuthenticationScreen implements EventHandler<ActionEvent> {
 			Button btnAdd2 = new Button("Func 1");
 			Button btnDelete2 = new Button("Func 2");
 			Button btnMoveUp2 = new Button("Func 3");
-			Button btnMoveDown2 = new Button("Func 4");
+			Button btnMoveDown2 = new Button("Return Card");
 
 			btnAdd2.setMaxWidth(Double.MAX_VALUE);
 			btnDelete2.setMaxWidth(Double.MAX_VALUE);

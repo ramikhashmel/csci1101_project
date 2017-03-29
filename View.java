@@ -105,7 +105,7 @@ public class View extends Application {
 		final Text actiontarget = new Text();
 		grid.add(actiontarget, 1, 6);
 
-		signIn.setOnAction(new AuthenticationScreen(cardNumberField, pinField, actiontarget));
+		signIn.setOnAction(new MainMenu(cardNumberField, pinField, actiontarget));
 
 		primaryStage.setScene(scene);
 		primaryStage.show();
