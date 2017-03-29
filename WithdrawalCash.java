@@ -52,6 +52,7 @@ public class WithdrawalCash implements EventHandler<ActionEvent> {
 		grid.add(actiontarget, 1, 6);
 
 		returnCard.setOnAction(new ExitScreen());
+		withdrawButton.setOnAction(new TransactionCompleted("Your withdrawal has been completed."));
 		
 		primaryStage.setScene(scene);
 		primaryStage.show();
