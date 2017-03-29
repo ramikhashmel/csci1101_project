@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 public class View extends Application {
 	static public Controller controller;
+	public static Stage primaryStage;
 
 	public static void initialize(String[] args) {
 		launch(args);
@@ -86,6 +87,7 @@ public class View extends Application {
 	// http://docs.oracle.com/javafx/2/get_started/form.htm#BABDDGEE
 	public void start(Stage primaryStage) {
 
+		this.primaryStage = primaryStage;
 		// create the initial screen the user will see
 		primaryStage.setTitle("Welcome to our ATM Demo");
 

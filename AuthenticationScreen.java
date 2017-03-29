@@ -1,12 +1,17 @@
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
+import javafx.stage.Stage;
 
 final class AuthenticationScreen implements EventHandler<ActionEvent> {
 	private final TextField cardNumberField;
@@ -21,16 +26,62 @@ final class AuthenticationScreen implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent e) {
-		actiontarget.setText("Please wait while your credentials are verified...");
-
-		Timeline timeline = new Timeline(
-				new KeyFrame(Duration.millis(2500), ae -> verifyCard(cardNumberField, pinField, actiontarget)));
-		timeline.play();
-
+		verifyCard(cardNumberField, pinField, actiontarget);
+	
 		if (Model.isAuthenticated()) {
-			// card is valid
+			Stage primaryStage = View.primaryStage;
+			primaryStage.setTitle("Withdraw");
+
+			GridPane grid = new GridPane();
+			grid.setAlignment(Pos.CENTER);
+			grid.setHgap(10);
+			grid.setVgap(10);
+			grid.setPadding(new Insets(25, 25, 25, 25));
+
+			Scene scene = new Scene(grid, 600, 400);
+
+			BorderPane border = new BorderPane();
+			border.setPadding(new Insets(20, 0, 20, 20));
+
+			Button btnAdd = new Button("Func 1");
+			Button btnDelete = new Button("Func 2");
+			Button btnMoveUp = new Button("Func 3");
+			Button btnMoveDown = new Button("Func 4");
+
+			btnAdd.setMaxWidth(Double.MAX_VALUE);
+			btnDelete.setMaxWidth(Double.MAX_VALUE);
+			btnMoveUp.setMaxWidth(Double.MAX_VALUE);
+			btnMoveDown.setMaxWidth(Double.MAX_VALUE);
+
+			VBox vbButtons = new VBox();
+			vbButtons.setSpacing(10);
+			vbButtons.setPadding(new Insets(0, 20, 10, 20)); 
+			vbButtons.getChildren().addAll(btnAdd, btnDelete, btnMoveUp, btnMoveDown);
+			
+			
+			Button btnAdd2 = new Button("Func 1");
+			Button btnDelete2 = new Button("Func 2");
+			Button btnMoveUp2 = new Button("Func 3");
+			Button btnMoveDown2 = new Button("Func 4");
+
+			btnAdd2.setMaxWidth(Double.MAX_VALUE);
+			btnDelete2.setMaxWidth(Double.MAX_VALUE);
+			btnMoveUp2.setMaxWidth(Double.MAX_VALUE);
+			btnMoveDown2.setMaxWidth(Double.MAX_VALUE);
+			
+			
+			VBox vbButtons2 = new VBox();
+			vbButtons2.setSpacing(10);
+			vbButtons2.setPadding(new Insets(0, 20, 10, 0)); 
+			vbButtons2.getChildren().addAll(btnAdd2, btnDelete2, btnMoveUp2, btnMoveDown2);
+			Text txt = new Text("What would you like to do today?");
+			grid.add(txt, 1, 0);
+			grid.add(vbButtons, 0, 0);
+			grid.add(vbButtons2, 2, 0);
+			primaryStage.setScene(scene);
+			primaryStage.show();
 		} else {
-			// card is invalid
+			System.out.println("Not authenticated.");
 		}
 	}
 
@@ -67,3 +118,5 @@ final class AuthenticationScreen implements EventHandler<ActionEvent> {
 		}
 	}
 }
+
+
