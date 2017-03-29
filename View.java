@@ -125,13 +125,4 @@ public class View extends Application {
 			break;
 		}
 	}
-
-	public void update(ViewState state, InputRestrictionResult result) {
-		if (result != null) {
-			// use the result to show the error, and the view state to update
-			// the state
-		} else {
-			update(state);
-		}
-	}
 }
