@@ -1,10 +1,14 @@
-import java.util.Date;
-
 public class Bill {
 	private int amount;
 	private String currency;
 	private int serialNumber;
 	private boolean isTorn;
+
+	@Override
+	public String toString() {
+		return "Bill [amount=" + amount + ", currency=" + currency + ", serialNumber=" + serialNumber + ", isTorn="
+				+ isTorn + "]";
+	}
 
 	public Bill(int amount) {
 		this.amount = amount;

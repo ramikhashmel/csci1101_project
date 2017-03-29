@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -76,6 +78,12 @@ public class WithdrawalCash implements EventHandler<ActionEvent> {
 			if (Model.checkIfPossibleToWithdraw(acc, withdrawAmt)) {
 				// TODO: change to float
 				this.acc.setBalance((int)(this.acc.getBalance() - withdrawAmt));
+				//http://stackoverflow.com/questions/24097059/
+				for (Iterator<Bill> i = Vault.getTwenties((int)(withdrawAmt/20)); i.hasNext(); ) {
+					Bill item = i.next();
+					System.out.println(item.toString() + " bill being dispensed...");
+				}
+				
 				System.out.println("Money dispensed.");
 				}
 			} else {
