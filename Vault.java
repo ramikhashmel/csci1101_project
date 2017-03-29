@@ -10,14 +10,14 @@ public class Vault {
 	private static ArrayList<Bill> fifties = new ArrayList<Bill>();
 
 	public static ListIterator<Bill> getFifties(int amt) {
-		if (fifties.size() >= amt) {
+		if (fifties.size()*50 >= amt) {
 			return fifties.listIterator(fifties.size() - amt);
 		}
 		return null;
 	}
 
 	public static ListIterator<Bill> getFives(int amt) {
-		if (fives.size() >= amt) {
+		if (fives.size()*5 >= amt) {
 			return fives.listIterator(fives.size() - amt);
 		}
 		return null;
@@ -40,7 +40,7 @@ public class Vault {
 	}
 
 	public static ListIterator<Bill> getTens(int amt) {
-		if (tens.size() >= amt) {
+		if (tens.size()*10 >= amt) {
 			return tens.listIterator(tens.size() - amt);
 		}
 		return null;
@@ -51,7 +51,7 @@ public class Vault {
 	}
 
 	public static ListIterator<Bill> getTwenties(int amt) {
-		if (twenties.size() >= amt) {
+		if (twenties.size()*20 >= amt) {
 			return twenties.listIterator(twenties.size() - amt);
 		}
 		return null;
