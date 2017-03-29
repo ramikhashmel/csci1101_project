@@ -43,37 +43,37 @@ final class MainMenu implements EventHandler<ActionEvent> {
 			BorderPane border = new BorderPane();
 			border.setPadding(new Insets(20, 0, 20, 20));
 
-			Button btnAdd = new Button("Withdraw");
-			Button btnDelete = new Button("Check Balance");
-			Button btnMoveUp = new Button("Fast Cash");
-			Button btnMoveDown = new Button("Transfer");
+			Button accActivity = new Button("Account Activity; Balances");
+			Button paymentsTrans = new Button("Payments & Transfers");
+			Button moreTrans = new Button("More Transactions");
+			Button funcFour = new Button("Func 4");
 
-			btnAdd.setMaxWidth(Double.MAX_VALUE);
-			btnDelete.setMaxWidth(Double.MAX_VALUE);
-			btnMoveUp.setMaxWidth(Double.MAX_VALUE);
-			btnMoveDown.setMaxWidth(Double.MAX_VALUE);
+			accActivity.setMaxWidth(Double.MAX_VALUE);
+			paymentsTrans.setMaxWidth(Double.MAX_VALUE);
+			moreTrans.setMaxWidth(Double.MAX_VALUE);
+			funcFour.setMaxWidth(Double.MAX_VALUE);
 
 			VBox vbButtons = new VBox();
 			vbButtons.setSpacing(10);
 			vbButtons.setPadding(new Insets(0, 20, 10, 20)); 
-			vbButtons.getChildren().addAll(btnAdd, btnDelete, btnMoveUp, btnMoveDown);
+			vbButtons.getChildren().addAll(accActivity, paymentsTrans, moreTrans, funcFour);
 			
 			
-			Button btnAdd2 = new Button("Func 1");
-			Button btnDelete2 = new Button("Func 2");
-			Button btnMoveUp2 = new Button("Func 3");
-			Button btnMoveDown2 = new Button("Return Card");
+			Button cashWithdraw = new Button("Cash Withdrawal");
+			Button fastCash = new Button("Fast Cash");
+			Button funcThree = new Button("Func 3");
+			Button returnCard = new Button("Return Card");
 
-			btnAdd2.setMaxWidth(Double.MAX_VALUE);
-			btnDelete2.setMaxWidth(Double.MAX_VALUE);
-			btnMoveUp2.setMaxWidth(Double.MAX_VALUE);
-			btnMoveDown2.setMaxWidth(Double.MAX_VALUE);
+			cashWithdraw.setMaxWidth(Double.MAX_VALUE);
+			fastCash.setMaxWidth(Double.MAX_VALUE);
+			funcThree.setMaxWidth(Double.MAX_VALUE);
+			returnCard.setMaxWidth(Double.MAX_VALUE);
 			
 			
 			VBox vbButtons2 = new VBox();
 			vbButtons2.setSpacing(10);
 			vbButtons2.setPadding(new Insets(0, 20, 10, 0)); 
-			vbButtons2.getChildren().addAll(btnAdd2, btnDelete2, btnMoveUp2, btnMoveDown2);
+			vbButtons2.getChildren().addAll(cashWithdraw, fastCash, funcThree, returnCard);
 			Text txt = new Text("What would you like to do today?");
 			grid.add(txt, 1, 0);
 			grid.add(vbButtons, 0, 0);
