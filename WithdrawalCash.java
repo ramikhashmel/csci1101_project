@@ -82,6 +82,7 @@ public class WithdrawalCash implements EventHandler<ActionEvent> {
 				for (Iterator<Bill> i = Vault.getTwenties((int)(withdrawAmt/20)); i.hasNext(); ) {
 					Bill item = i.next();
 					System.out.println(item.toString() + " bill being dispensed...");
+					i.remove();
 				}
 				
 				System.out.println("Money dispensed.");
