@@ -51,7 +51,7 @@ public class WithdrawalCash implements EventHandler<ActionEvent> {
 		final Text actiontarget = new Text();
 		grid.add(actiontarget, 1, 6);
 
-		returnCard.setActionOn(new ExitScreen());
+		returnCard.setOnAction(new ExitScreen());
 		
 		primaryStage.setScene(scene);
 		primaryStage.show();
