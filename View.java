@@ -43,25 +43,6 @@ public class View extends Application {
 		card = new Card();
 
 		update(ViewState.WELCOME_SCREEN_CARD_AUTH);
-
-		// create new account, and ask user for a card number
-		String cardNumber = UserInput.getString("Card Number: ", Restrictions.CCNumber());
-
-		card.setNumber(cardNumber);
-
-		// get pin, and try to validate the card
-		String pin = UserInput.getString("PIN: ", Restrictions.pin());
-		card.setPin(pin);
-
-		InputRestrictionResult result = null;
-
-		// if it's valid, continue otherwise abort
-		if (getCard() != null && controller.model.isValidCard(getCard())) {
-			update(ViewState.CARD_VALID, result);
-			update(ViewState.CARD_AUTHENTICATED);
-		} else {
-			update(ViewState.CARD_INVALID, result);
-		}
 	}
 
 	public Card getCard() {
