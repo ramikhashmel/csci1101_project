@@ -7,27 +7,8 @@ public class Card {
 
 	private boolean isDebit;
 
-	@Override
-	public boolean equals(Object obj) {
-		Card other = (Card) obj;
-		if (cardNumber == null) {
-			if (other.cardNumber != null)
-				return false;
-		} else if (!cardNumber.equals(other.cardNumber))
-			return false;
-		if (cardholderName == null) {
-			if (other.cardholderName != null)
-				return false;
-		} else if (!cardholderName.equals(other.cardholderName))
-			return false;
-		if (cvv != other.cvv)
-			return false;
-		if (institution == null) {
-			if (other.institution != null)
-				return false;
-		} else if (!institution.equals(other.institution))
-			return false;
-		return true;
+	public boolean equals(Card obj) {
+		return (cardNumber.equals(obj.cardNumber));
 	}
 
 	private String cardholderName;

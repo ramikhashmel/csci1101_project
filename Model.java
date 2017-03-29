@@ -16,6 +16,7 @@ public class Model {
 		acc.setBalance(1000);
 		acc.setCard(new Card("1234567812341234"));
 		acc.setName("Bob Jones");
+		accounts.add(acc);
 		// read the credit card numbers from the file
 		cards.add(new Card("1234567812341234"));
 	}

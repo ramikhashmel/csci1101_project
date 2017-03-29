@@ -64,7 +64,9 @@ public class WithdrawalCash implements EventHandler<ActionEvent> {
 		if (withdrawAmountField.getLength() != 0) {
 			withdrawAmountValue = Float.valueOf(withdrawAmountField.getText());
 		}
-		withdrawButton.setOnAction(withdrawFunds(withdrawAmountValue, acc));
+		
+		final float withdrawAmountValueFinal = withdrawAmountValue;
+		withdrawButton.setOnAction(f -> withdrawFunds(withdrawAmountValueFinal, acc));
 		
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -72,7 +74,15 @@ public class WithdrawalCash implements EventHandler<ActionEvent> {
 	
 	private EventHandler<ActionEvent> withdrawFunds(float withdrawAmt, Account acc) {
 		if (acc != null) {
-		Model.checkIfPossibleToWithdraw(acc, withdrawAmt);
+			if (Model.checkIfPossibleToWithdraw(acc, withdrawAmt)) {
+				// TODO: change to float
+				this.acc.setBalance((int)(this.acc.getBalance() - withdrawAmt));
+				while (Vault.getFifties(1) != null) {
+					System.out.println("Dispensing...");
+				}
+			} else {
+				System.out.println("Withdraw failed.");
+			}
 		}
 		return null;
 	}
