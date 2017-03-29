@@ -29,6 +29,12 @@ final class MainMenu implements EventHandler<ActionEvent> {
 		verifyCard(cardNumberField, pinField, actiontarget);
 	
 		if (Model.isAuthenticated()) {
+			Card card = new Card();
+			card.setNumber(this.cardNumberField.getText());
+			card.setPin(this.pinField.getText());
+			
+			Account acc = Model.findAccount(card);
+
 			Stage primaryStage = View.primaryStage;
 			primaryStage.setTitle(Utilities.ATMName + " - Menu");
 
@@ -78,15 +84,16 @@ final class MainMenu implements EventHandler<ActionEvent> {
 			grid.add(txt, 1, 0);
 			grid.add(vbButtons, 0, 0);
 			grid.add(vbButtons2, 2, 0);
+			cashWithdraw.setOnAction(new WithdrawalCash(acc));
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
-			cashWithdraw.setOnAction(new WithdrawalCash());
+			
 		} else {
 			System.out.println("Not authenticated.");
 		}
 	}
-
+	
 	/**
 	 * Verifies if the card is valid or not
 	 * 

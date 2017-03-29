@@ -5,11 +5,17 @@ import java.util.Map;
 public class Model {
 	private static boolean isAuthenticated;
 	ArrayList<Card> cards = new ArrayList<Card>();
+	static ArrayList<Account> accounts = new ArrayList<Account>();
 	int balance;
 	private Controller controller;
 	private Vault vault = new Vault();
 
 	public Model() {
+		Account acc = new Account();
+		acc.setAccountNumber(12345);
+		acc.setBalance(1000);
+		acc.setCard(new Card("1234567812341234"));
+		acc.setName("Bob Jones");
 		// read the credit card numbers from the file
 		cards.add(new Card("1234567812341234"));
 	}
@@ -54,19 +60,19 @@ public class Model {
 	 * 
 	 * @param acc
 	 *            The user's account
-	 * @param userWithdrawAmount
+	 * @param withdrawAmt
 	 *            The withdraw amount
 	 * @return Whether or not the transaction can be completed
 	 */
-	public static boolean checkIfPossibleToWithdraw(Account acc, int userWithdrawAmount) {
-		if (userWithdrawAmount != (int) userWithdrawAmount) {
+	public static boolean checkIfPossibleToWithdraw(Account acc, float withdrawAmt) {
+		if (withdrawAmt != (int) withdrawAmt) {
 			System.out.println(
-					"You cannot withdraw coins. However, you can withdraw " + (int) userWithdrawAmount + " instead.");
+					"You cannot withdraw coins. However, you can withdraw " + (int) withdrawAmt + " instead.");
 			return false;
-		} else if (Vault.getTotal() < userWithdrawAmount) {
+		} else if (Vault.getTotal() < withdrawAmt) {
 			System.out.println("The ATM does not have enough money to service your request.");
 			return false;
-		} else if (userWithdrawAmount > acc.getCashLimitRemaining()) {
+		} else if (withdrawAmt > acc.getCashLimitRemaining()) {
 			System.out.println("This withdraw would exceed your daily withdraw limit.");
 			return false;
 		} else {
@@ -79,7 +85,7 @@ public class Model {
 			denominationsAvailable.put(10, Vault.getNumOfTens());
 			denominationsAvailable.put(5, Vault.getNumOfFives());
 
-			int runningWithdraw = userWithdrawAmount;
+			int runningWithdraw = (int) withdrawAmt;
 
 			Map<Integer, Integer> withdrawDenominations = new HashMap<Integer, Integer>();
 
@@ -116,7 +122,7 @@ public class Model {
 				 * and ask if they'd like to have that out instead.
 				 */
 				System.out.println("You can't withdraw that amount. Would you like to withdraw $"
-						+ (userWithdrawAmount - runningWithdraw) + " instead?");
+						+ (withdrawAmt - runningWithdraw) + " instead?");
 				return false;
 			} else {
 				// there's no money left in the ATM, or a fatal calculation
@@ -146,5 +152,14 @@ public class Model {
 
 	public static boolean isAuthenticated() {
 		return isAuthenticated;
+	}
+
+	public static Account findAccount(Card card) {
+		for (int i = 0; i < accounts.size(); i++) {
+			if (accounts.get(i).getCard().equals(card)) {
+				return accounts.get(i);
+			}
+		}
+		return null;
 	}
 }

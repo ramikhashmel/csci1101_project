@@ -15,8 +15,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class WithdrawalCash implements EventHandler<ActionEvent> {
+	private final Account acc;
+	
+	WithdrawalCash(Account acc) {
+		this.acc = acc;
+	}
+	
 	@Override
-	public void handle(ActionEvent event) {
+	public void handle(ActionEvent e) {
 		Stage primaryStage = View.primaryStage;
 		
 		primaryStage.setTitle(Utilities.ATMName + " - Withdrawal");
@@ -52,9 +58,22 @@ public class WithdrawalCash implements EventHandler<ActionEvent> {
 		grid.add(actiontarget, 1, 6);
 
 		returnCard.setOnAction(new ExitScreen());
-		withdrawButton.setOnAction(new TransactionCompleted("Your withdrawal has been completed."));
+		
+		float withdrawAmountValue = (float) 0.00;
+		
+		if (withdrawAmountField.getLength() != 0) {
+			withdrawAmountValue = Float.valueOf(withdrawAmountField.getText());
+		}
+		withdrawButton.setOnAction(withdrawFunds(withdrawAmountValue, acc));
 		
 		primaryStage.setScene(scene);
 		primaryStage.show();
+	}
+	
+	private EventHandler<ActionEvent> withdrawFunds(float withdrawAmt, Account acc) {
+		if (acc != null) {
+		Model.checkIfPossibleToWithdraw(acc, withdrawAmt);
+		}
+		return null;
 	}
 }
