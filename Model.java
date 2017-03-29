@@ -19,6 +19,13 @@ public class Model {
 		accounts.add(acc);
 		// read the credit card numbers from the file
 		cards.add(new Card("1234567812341234"));
+		
+		ArrayList<Bill> twenties = new ArrayList<Bill>();
+		for (int i = 0; i < 20; i++) {
+			twenties.add(new Bill(20));
+		}
+		
+		Vault.addTwenties(twenties);
 	}
 
 	public void addController(Controller controller) {
