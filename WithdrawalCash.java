@@ -65,8 +65,7 @@ public class WithdrawalCash implements EventHandler<ActionEvent> {
 			withdrawAmountValue = Float.valueOf(withdrawAmountField.getText());
 		}
 		
-		final float withdrawAmountValueFinal = withdrawAmountValue;
-		withdrawButton.setOnAction(f -> withdrawFunds(withdrawAmountValueFinal, acc));
+		withdrawButton.setOnAction(f -> withdrawFunds(Float.valueOf(withdrawAmountField.getText()), acc));
 		
 		primaryStage.setScene(scene);
 		primaryStage.show();
