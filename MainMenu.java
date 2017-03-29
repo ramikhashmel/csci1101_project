@@ -80,6 +80,8 @@ final class MainMenu implements EventHandler<ActionEvent> {
 			grid.add(vbButtons2, 2, 0);
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			
+			cashWithdraw.setOnAction(new WithdrawalCash());
 		} else {
 			System.out.println("Not authenticated.");
 		}
