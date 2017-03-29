@@ -47,7 +47,7 @@ public class Vault {
 	}
 
 	public static int getTotal() {
-		return (fives.size() + tens.size() + twenties.size() + fifties.size());
+		return (fives.size()*5 + tens.size()*10 + twenties.size()*20 + fifties.size()*50);
 	}
 
 	public static ListIterator<Bill> getTwenties(int amt) {
