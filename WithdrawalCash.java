@@ -76,13 +76,11 @@ public class WithdrawalCash implements EventHandler<ActionEvent> {
 			if (Model.checkIfPossibleToWithdraw(acc, withdrawAmt)) {
 				// TODO: change to float
 				this.acc.setBalance((int)(this.acc.getBalance() - withdrawAmt));
-				while (Vault.getFifties(1) != null) {
-					System.out.println("Dispensing...");
+				System.out.println("Money dispensed.");
 				}
 			} else {
 				System.out.println("Withdraw failed.");
 			}
-		}
 		return null;
 	}
 }
