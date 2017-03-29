@@ -57,19 +57,19 @@ public class Vault {
 		return null;
 	}
 
-	public void addFifties(ArrayList<Bill> fifties) {
+	public static void addFifties(ArrayList<Bill> fifties) {
 		Vault.fifties.addAll(fifties);
 	}
 
-	public void addFives(ArrayList<Bill> fives) {
+	public static void addFives(ArrayList<Bill> fives) {
 		Vault.fives.addAll(fives);
 	}
 
-	public void addTens(ArrayList<Bill> tens) {
+	public static void addTens(ArrayList<Bill> tens) {
 		Vault.tens.addAll(tens);
 	}
 
-	public void addTwenties(ArrayList<Bill> twenties) {
+	public static void addTwenties(ArrayList<Bill> twenties) {
 		Vault.twenties.addAll(twenties);
 	}
 
