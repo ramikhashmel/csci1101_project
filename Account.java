@@ -69,7 +69,6 @@ public class Account {
 	}
 
 	public int getCashLimitRemaining() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 200;
 	}
 }
