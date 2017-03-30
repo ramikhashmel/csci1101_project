@@ -85,6 +85,10 @@ public class WithdrawalCash implements EventHandler<ActionEvent> {
 					i.remove();
 				}
 				
+				// Open an input stream  to the audio file.
+				String clipURL = "https://www.freesound.org/data/previews/41/41195_266274-lq.mp3";
+				AudioClip audio = new AudioClip(clipURL);
+				audio.play();
 				System.out.println("Money dispensed.");
 				}
 			} else {
