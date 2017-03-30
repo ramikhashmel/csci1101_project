@@ -5,10 +5,10 @@ import java.util.Map;
 import javafx.scene.control.Label;
 
 public class Model {
-	private static boolean isAuthenticated;
+  private static boolean isAuthenticated;
 	ArrayList<Card> cards = new ArrayList<Card>();
+	int balance = 20000;
 	static ArrayList<Account> accounts = new ArrayList<Account>();
-	int balance;
 	private Controller controller;
 	private Vault vault = new Vault();
 
@@ -20,6 +20,16 @@ public class Model {
 		acc.setName("Bob Jones");
 		accounts.add(acc);
 		// read the credit card numbers from the file
+		cards.add(new Card("1234567891234567", 359, "1234", "Alex Fifield"));//user card(temp)
+      //temporary arraylist of cards
+      for(int i=0; i < 25; i++)
+      {
+         int firstHalf = (int)(Math.random() * 100000000);
+         int secondHalf = (int)(Math.random() * 100000000);
+         String number = firstHalf + "" + secondHalf;
+         cards.add(new Card (number));
+      }
+      //gets user input information
 		cards.add(new Card("1234567812341234"));
 		
 		ArrayList<Bill> twenties = new ArrayList<Bill>();
@@ -33,35 +43,25 @@ public class Model {
 	public void addController(Controller controller) {
 		this.controller = controller;
 	}
-
+   
 	public void aggregateFromAccount() {
-
-	}
-
-	public boolean checkAuthencity() {
-		return false;
+      Account curr = new Account()
 	}
 
 	public void dispenseMoney() {
-
+      balance = balance - userWithdrawAmount;
+      //print confirmation message
 	}
 
 	public boolean isValidCard(Card card) {
 		for (int i = 0; i < cards.size(); i++) {
-			if (card.equals(cards.get(i))) {
+			if (card.equals(cards.get(i).getCardNumber())) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public void validateCardWithBank() {
-
-	}
-
-	public void validateDataFromAccount() {
-
-	}
 
 	/**
 	 * Checks if the withdraw amount is possible or not, by checking the user's
@@ -145,7 +145,7 @@ public class Model {
 	public Vault getVault() {
 		return vault;
 	}
-
+  
 	public void openOutputDrawer() {
 		// TODO Auto-generated method stub
 
