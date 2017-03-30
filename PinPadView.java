@@ -3,10 +3,10 @@ import javafx.event.EventHandler;
 
 public class PinPadView implements EventHandler<ActionEvent> {
 
-	@Override
-	public void handle(ActionEvent event) {
-		// TODO Auto-generated method stub
-		System.out.println(event.getSource().toString());
-	}
+  @Override
+  public void handle(ActionEvent event) {
+    // TODO Auto-generated method stub
+    System.out.println(event.getSource().toString());
+  }
 
 }
