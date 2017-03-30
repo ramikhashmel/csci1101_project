@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.scene.control.Label;
+
 public class Model {
 	private static boolean isAuthenticated;
 	ArrayList<Card> cards = new ArrayList<Card>();
@@ -72,16 +74,16 @@ public class Model {
 	 *            The withdraw amount
 	 * @return Whether or not the transaction can be completed
 	 */
-	public static boolean checkIfPossibleToWithdraw(Account acc, float withdrawAmt) {
+	public static boolean checkIfPossibleToWithdraw(Account acc, float withdrawAmt, Label withdraw) {
 		if (withdrawAmt != (int) withdrawAmt) {
-			System.out.println(
+			withdraw.setText(
 					"You cannot withdraw coins. However, you can withdraw " + (int) withdrawAmt + " instead.");
 			return false;
 		} else if (Vault.getTotal() < withdrawAmt) {
-			System.out.println("The ATM does not have enough money to service your request.");
+			withdraw.setText("The ATM does not have enough money to service your request.");
 			return false;
 		} else if (withdrawAmt > acc.getCashLimitRemaining()) {
-			System.out.println("This withdraw would exceed your daily withdraw limit.");
+			withdraw.setText("This withdraw would exceed your daily withdraw limit.");
 			return false;
 		} else {
 
@@ -129,7 +131,7 @@ public class Model {
 				 * cannot be withdrawn. Subtract the remainder from the user's withdraw amount
 				 * and ask if they'd like to have that out instead.
 				 */
-				System.out.println("You can't withdraw that amount. Would you like to withdraw $"
+				withdraw.setText("You can't withdraw that amount. Would you like to withdraw $"
 						+ (withdrawAmt - runningWithdraw) + " instead?");
 				return false;
 			} else {
