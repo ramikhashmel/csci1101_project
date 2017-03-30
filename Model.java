@@ -76,59 +76,70 @@ public class Model {
     } else if (withdrawAmt > acc.getCashLimitRemaining()) {
       withdraw.setText("This withdraw would exceed your daily withdraw limit.");
       return false;
-    } else {
+    } else
+      return uncheckedWithdraw(withdrawAmt, withdraw);
+  }
 
-      // get the data from the vault and see how many of each denomination
-      // we have
-      Map<Integer, Integer> denominationsAvailable = new HashMap<Integer, Integer>();
-      denominationsAvailable.put(50, Vault.getNumOfFifties());
-      denominationsAvailable.put(20, Vault.getNumOfTwenties());
-      denominationsAvailable.put(10, Vault.getNumOfTens());
-      denominationsAvailable.put(5, Vault.getNumOfFives());
+  /**
+   * Checks if it is possible to withdraw, but does not check the status of the vault, the user's
+   * cash limit, or if the amount is valid
+   * 
+   * @param withdrawAmt The amount to withdraw
+   * @param withdraw The withdraw label
+   * @return Whether or not the value can be withdrawn, and if it can, returns the bills that need
+   *         to be withdrawn from the vault
+   */
+  private static boolean uncheckedWithdraw(float withdrawAmt, Label withdraw) {
+    // get the data from the vault and see how many of each denomination
+    // we have
+    Map<Integer, Integer> denominationsAvailable = new HashMap<Integer, Integer>();
+    denominationsAvailable.put(50, Vault.getNumOfFifties());
+    denominationsAvailable.put(20, Vault.getNumOfTwenties());
+    denominationsAvailable.put(10, Vault.getNumOfTens());
+    denominationsAvailable.put(5, Vault.getNumOfFives());
 
-      int runningWithdraw = (int) withdrawAmt;
+    int runningWithdraw = (int) withdrawAmt;
 
-      Map<Integer, Integer> withdrawDenominations = new HashMap<Integer, Integer>();
+    Map<Integer, Integer> withdrawDenominations = new HashMap<Integer, Integer>();
 
-      /*
-       * Iterate through all of the bills, and subtract the largest possible bill as many times as
-       * possible from the user's withdraw amount.
-       */
-      for (int i = 0; i < Utilities.stdDenominations.size(); i++) {
-        int currBillVal = Utilities.stdDenominations.get(i);
-        int numOfNeededBills = (int) (runningWithdraw / currBillVal);
+    /*
+     * Iterate through all of the bills, and subtract the largest possible bill as many times as
+     * possible from the user's withdraw amount.
+     */
+    for (int i = 0; i < Utilities.stdDenominations.size(); i++) {
+      int currBillVal = Utilities.stdDenominations.get(i);
+      int numOfNeededBills = (int) (runningWithdraw / currBillVal);
 
-        if (numOfNeededBills <= denominationsAvailable.get(currBillVal)) {
-          withdrawDenominations.put(currBillVal, numOfNeededBills);
-          runningWithdraw = runningWithdraw - (numOfNeededBills * currBillVal);
-        } else {
-          withdrawDenominations.put(currBillVal, 0);
-        }
-      }
-
-      // if the amount that remains is zero, then we can make a withdraw
-      if (runningWithdraw == 0) {
-        // user can withdraw money because enough denominations exist
-        // calculate how many bills they should withdraw
-        System.out.println("$50 x " + withdrawDenominations.get(50));
-        System.out.println("$20 x " + withdrawDenominations.get(20));
-        System.out.println("$10 x " + withdrawDenominations.get(10));
-        System.out.println("$5 x " + withdrawDenominations.get(5));
-        return true;
-      } else if (runningWithdraw > 0) {
-        /*
-         * There was a remainder left from calculating the bills, so the remainder cannot be
-         * withdrawn. Subtract the remainder from the user's withdraw amount and ask if they'd like
-         * to have that out instead.
-         */
-        withdraw.setText("You can't withdraw that amount. Would you like to withdraw $"
-            + (withdrawAmt - runningWithdraw) + " instead?");
-        return false;
+      if (numOfNeededBills <= denominationsAvailable.get(currBillVal)) {
+        withdrawDenominations.put(currBillVal, numOfNeededBills);
+        runningWithdraw = runningWithdraw - (numOfNeededBills * currBillVal);
       } else {
-        // there's no money left in the ATM, or a fatal calculation
-        // error occurred
-        return false;
+        withdrawDenominations.put(currBillVal, 0);
       }
+    }
+
+    // if the amount that remains is zero, then we can make a withdraw
+    if (runningWithdraw == 0) {
+      // user can withdraw money because enough denominations exist
+      // calculate how many bills they should withdraw
+      System.out.println("$50 x " + withdrawDenominations.get(50));
+      System.out.println("$20 x " + withdrawDenominations.get(20));
+      System.out.println("$10 x " + withdrawDenominations.get(10));
+      System.out.println("$5 x " + withdrawDenominations.get(5));
+      return true;
+    } else if (runningWithdraw > 0) {
+      /*
+       * There was a remainder left from calculating the bills, so the remainder cannot be
+       * withdrawn. Subtract the remainder from the user's withdraw amount and ask if they'd like to
+       * have that out instead.
+       */
+      withdraw.setText("You can't withdraw that amount. Would you like to withdraw $"
+          + (withdrawAmt - runningWithdraw) + " instead?");
+      return false;
+    } else {
+      // there's no money left in the ATM, or a fatal calculation
+      // error occurred
+      return false;
     }
   }
 
