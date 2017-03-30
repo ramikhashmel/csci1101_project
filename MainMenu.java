@@ -18,6 +18,7 @@ final class MainMenu implements EventHandler<ActionEvent> {
 	private final PasswordField pinField;
 	private final Text actiontarget;
 
+	public static Scene mainMenu;
 	MainMenu(TextField cardNumberField, PasswordField pinField, Text actiontarget) {
 		this.cardNumberField = cardNumberField;
 		this.pinField = pinField;
@@ -87,13 +88,22 @@ final class MainMenu implements EventHandler<ActionEvent> {
 			cashWithdraw.setOnAction(new WithdrawalCash(acc));
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			fastCash.setOnAction(j -> fashCashView());
+			returnCard.setOnAction(h -> System.exit(0));
 			
 			
+			accActivity.setOnAction(g -> funcFour.setText("" + (acc.getBalance())));
+			this.mainMenu = scene;
 		} else {
 			System.out.println("Not authenticated.");
 		}
 	}
 	
+	private Object fashCashView() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/**
 	 * Verifies if the card is valid or not
 	 * 

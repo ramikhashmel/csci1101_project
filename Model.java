@@ -45,12 +45,7 @@ public class Model {
 	}
    
 	public void aggregateFromAccount() {
-      Account curr = new Account()
-	}
-
-	public void dispenseMoney() {
-      balance = balance - userWithdrawAmount;
-      //print confirmation message
+      Account curr = new Account();
 	}
 
 	public boolean isValidCard(Card card) {

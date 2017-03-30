@@ -1,8 +1,11 @@
 import java.util.ArrayList;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -127,17 +130,27 @@ public class View extends Application {
 		grid.add(actiontarget, 1, 6);
 
 		signIn.setOnAction(new MainMenu(cardNumberField, pinField, actiontarget));
-      //button.setOnAction(this::processButtonPress);
-		
+		for (Node n : grid.getChildren()) {
+		n.setOnMouseClicked(f -> handleCard(cardNumberField, pinField, n, signIn));
+		}
+        button.setOnAction(new PinPadView());
+		signIn.setVisible(false);
       primaryStage.setScene(scene);
 		primaryStage.show();
 	}
-   /*
-   public void processButtonPress(ActionEvent event){
+   
 
-   }
-   */
-
+	public EventHandler<ActionEvent> handleCard(TextField cardNumberField, PasswordField pinField, Node n, Button signIn) {
+		if (cardNumberField.getLength() < 16) {
+			cardNumberField.appendText((((Button)n).getText()));
+		} else if (pinField.getLength() < 4 ){
+			pinField.appendText(((((Button)n).getText())));
+		} else {
+			signIn.setVisible(true);
+		}
+		return null;
+		
+	}
 	public void update(ViewState state) {
 		// this would fire when the input does not have to be restricted
 		System.out.println("update() called with new view state " + state.name());
