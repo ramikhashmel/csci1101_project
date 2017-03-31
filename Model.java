@@ -78,17 +78,18 @@ public class Model {
    * @param withdrawAmt The withdraw amount
    * @return Whether or not the transaction can be completed
    */
-  public static boolean checkIfPossibleToWithdraw(Account acc, float withdrawAmt, Label withdraw) {
+  public static WithdrawResult checkIfPossibleToWithdraw(Account acc, float withdrawAmt, Label withdraw) {
+    WithdrawResult result = new WithdrawResult();
     if (withdrawAmt != (int) withdrawAmt) {
-      withdraw.setText("You cannot withdraw coins. However, you can withdraw " + (int) withdrawAmt
-          + " instead.");
-      return false;
+      result.setErrorMessage(String
+          .format("You cannot withdraw coins. However, you can withdraw %d instead.", withdrawAmt));
+      return result;
     } else if (Vault.getTotal() < withdrawAmt) {
-      withdraw.setText("The ATM does not have enough money to service your request.");
-      return false;
+      result.setErrorMessage("The ATM does not have enough money to service your request.");
+      return result;
     } else if (withdrawAmt > acc.getRemainingDailyWithdrawLimit()) {
-      withdraw.setText("This withdraw would exceed your daily withdraw limit.");
-      return false;
+      result.setErrorMessage("This withdraw would exceed your daily withdraw limit.");
+      return result;
     } else
       return uncheckedWithdraw(withdrawAmt, withdraw);
   }
@@ -102,10 +103,12 @@ public class Model {
    * @return Whether or not the value can be withdrawn, and if it can, returns the bills that need
    *         to be withdrawn from the vault
    */
-  private static boolean uncheckedWithdraw(float withdrawAmt, Label withdraw) {
+  private static WithdrawResult uncheckedWithdraw(float withdrawAmt, Label withdraw) {
+    WithdrawResult result = new WithdrawResult();
+
     // get the data from the vault and see how many of each denomination
     // we have
-    Map<Integer, Integer> denominationsAvailable = new HashMap<Integer, Integer>();
+    Map<Integer, Integer> denominationsAvailable = new HashMap<>();
     denominationsAvailable.put(50, Vault.getNumOfFifties());
     denominationsAvailable.put(20, Vault.getNumOfTwenties());
     denominationsAvailable.put(10, Vault.getNumOfTens());
@@ -121,7 +124,7 @@ public class Model {
      */
     for (int i = 0; i < Utilities.stdDenominations.size(); i++) {
       int currBillVal = Utilities.stdDenominations.get(i);
-      int numOfNeededBills = (int) (runningWithdraw / currBillVal);
+      int numOfNeededBills = runningWithdraw / currBillVal;
 
       if (numOfNeededBills <= denominationsAvailable.get(currBillVal)) {
         withdrawDenominations.put(currBillVal, numOfNeededBills);
@@ -135,24 +138,27 @@ public class Model {
     if (runningWithdraw == 0) {
       // user can withdraw money because enough denominations exist
       // calculate how many bills they should withdraw
+      result.setWithdrawAmount(withdrawDenominations);
       System.out.println("$50 x " + withdrawDenominations.get(50));
       System.out.println("$20 x " + withdrawDenominations.get(20));
       System.out.println("$10 x " + withdrawDenominations.get(10));
       System.out.println("$5 x " + withdrawDenominations.get(5));
-      return true;
+      result.setDidSucceed(true);
+      return result;
     } else if (runningWithdraw > 0) {
       /*
        * There was a remainder left from calculating the bills, so the remainder cannot be
        * withdrawn. Subtract the remainder from the user's withdraw amount and ask if they'd like to
        * have that out instead.
        */
-      withdraw.setText("You can't withdraw that amount. Would you like to withdraw $"
+      result.setErrorMessage("You can't withdraw that amount. Would you like to withdraw $"
           + (withdrawAmt - runningWithdraw) + " instead?");
-      return false;
+      return result;
     } else {
       // there's no money left in the ATM, or a fatal calculation
       // error occurred
-      return false;
+      result.setErrorMessage("An unknown error occurred.");
+      return result;
     }
   }
 

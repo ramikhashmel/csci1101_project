@@ -1,6 +1,7 @@
 // The vault, where the money is stored and accessed
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.ListIterator;
 
 public class Vault {
@@ -81,5 +82,19 @@ public class Vault {
   public boolean withdraw(double amount) {
     // TODO Auto-generated method stub
     return false;
+  }
+
+  public static Iterator<Bill> getDenominationValue(int i) {
+    switch (i) {
+      case 5:
+        return getFives(i);
+      case 10:
+        return getTens(i);
+      case 20:
+        return getTwenties(i);
+      case 50:
+        return getFifties(i);
+    }
+    return null;
   }
 }

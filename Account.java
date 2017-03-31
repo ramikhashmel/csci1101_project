@@ -2,7 +2,7 @@
  * This is the bank account of the user
  */
 public class Account {
-  private int balance;
+  private float balance;
   private int accountNumber;
   private int depositNum;
   private String name;
@@ -15,7 +15,7 @@ public class Account {
     return accountNumber;
   }
 
-  public int getBalance() {
+  public float getBalance() {
     return balance;
   }
 
@@ -35,7 +35,7 @@ public class Account {
     this.accountNumber = accountNumber;
   }
 
-  public void setBalance(int balance) {
+  public void setBalance(float balance) {
     this.balance = balance;
   }
 

@@ -19,6 +19,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class WithdrawCash implements EventHandler<ActionEvent> {
+
   private final Account acc;
 
   WithdrawCash(Account acc) {
@@ -83,35 +84,40 @@ public class WithdrawCash implements EventHandler<ActionEvent> {
   }
 
 
-
   private EventHandler<ActionEvent> withdrawFunds(float withdrawAmt, Account acc,
       Label withdrawAmount) throws IOException {
     if (acc != null) {
-      if (Model.checkIfPossibleToWithdraw(acc, withdrawAmt, withdrawAmount)) {
-        // TODO: change to float
-        this.acc.setBalance((int) (this.acc.getBalance() - withdrawAmt));
-        // http://stackoverflow.com/questions/24097059/
-        for (Iterator<Bill> i = Vault.getTwenties((int) (withdrawAmt / 20)); i.hasNext();) {
-          Bill item = i.next();
-          System.out.println(item.toString() + " bill being dispensed...");
-          i.remove();
-        }
-
-        // Open an input stream to the audio file.
-        String clipURL = "https://www.freesound.org/data/previews/41/41195_266274-lq.mp3";
-
-        try {
-          AudioClip audio = new AudioClip(clipURL);
-          audio.play();
-        } catch (MediaException e) {
-          System.out.println("The audio could not be played because " + e.getMessage());
-        }
-        System.out.println("Money dispensed.");
-        View.primaryStage.setScene(MainMenu.mainMenu);
-      }
-    } else {
-      withdrawAmount.setText("Withdraw failed.");
+      WithdrawResult result = Model.checkIfPossibleToWithdraw(acc, withdrawAmt, withdrawAmount);
+      if (result.didSucceed())
+        dispenseCash(withdrawAmt, result);
+      else
+        withdrawAmount.setText(result.getErrorMessage());
     }
     return null;
+  }
+
+  private void dispenseCash(float withdrawAmt, WithdrawResult result) {
+    this.acc.setBalance(this.acc.getBalance() - withdrawAmt);
+    // http://stackoverflow.com/questions/24097059/
+
+    for (int i : result.getWithdrawAmount().keySet()) {
+      for (Iterator<Bill> billsIter = Vault.getDenominationValue(i); billsIter.hasNext(); ) {
+        Bill item = billsIter.next();
+        System.out.println(item.toString() + " bill being dispensed...");
+        billsIter.remove();
+      }
+    }
+
+    // Open an input stream to the audio file.
+    String clipURL = "https://www.freesound.org/data/previews/41/41195_266274-lq.mp3";
+
+    try {
+      AudioClip audio = new AudioClip(clipURL);
+      audio.play();
+    } catch (MediaException e) {
+      System.out.println("The audio could not be played because " + e.getMessage());
+    }
+    System.out.println("Money dispensed.");
+    View.primaryStage.setScene(MainMenu.mainMenu);
   }
 }
