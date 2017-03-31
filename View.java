@@ -36,7 +36,7 @@ public class View extends Application {
   }
 
   public void addController(Controller controller) {
-    this.controller = controller;
+    View.controller = controller;
 
   }
 
@@ -64,7 +64,7 @@ public class View extends Application {
     // audio = new AudioClip(clipURL);
     String[] keys = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "Enter", "Cancel", "Back"};
 
-    this.primaryStage = primaryStage;
+    View.primaryStage = primaryStage;
     // create the initial screen the user will see
     primaryStage.setTitle("Welcome to our ATM Demo");
 

@@ -43,10 +43,6 @@ public class Model {
     this.controller = controller;
   }
 
-  public void aggregateFromAccount() {
-    Account curr = new Account();
-  }
-
   public boolean isValidCard(Card card) {
     for (int i = 0; i < cards.size(); i++) {
       if (card.equals(cards.get(i).getCardNumber())) {

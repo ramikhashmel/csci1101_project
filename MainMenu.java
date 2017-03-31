@@ -94,10 +94,14 @@ final class MainMenu implements EventHandler<ActionEvent> {
 
 
       accActivity.setOnAction(g -> funcFour.setText("" + (acc.getBalance())));
-      this.mainMenu = scene;
+      MainMenu.setScene(scene);
     } else {
       System.out.println("Not authenticated.");
     }
+  }
+
+  private static void setScene(Scene scene) {
+    MainMenu.mainMenu = scene;
   }
 
   private Object fashCashView() {

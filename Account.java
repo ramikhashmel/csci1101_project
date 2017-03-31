@@ -55,4 +55,12 @@ public class Account {
   public int getCashLimitRemaining() {
     return limit;
   }
+
+  public ContactInformation getContactInfo() {
+    return contactInfo;
+  }
+
+  public void setContactInfo(ContactInformation contactInfo) {
+    this.contactInfo = contactInfo;
+  }
 }

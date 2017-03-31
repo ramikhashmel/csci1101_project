@@ -18,6 +18,7 @@ public class ReceiptFormatter {
   private TransactionType transType;
   private Account acc;
   private Transaction trans;
+  @SuppressWarnings("unused")
   private int refNumber;
 
   public String getMachineID() {
