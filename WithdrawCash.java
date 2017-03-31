@@ -1,4 +1,6 @@
+import java.io.IOException;
 import java.util.Iterator;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -10,12 +12,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.AudioClip;
+import javafx.scene.media.MediaException;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import java.io.*;
 
 public class WithdrawCash implements EventHandler<ActionEvent> {
   private final Account acc;
@@ -99,8 +100,12 @@ public class WithdrawCash implements EventHandler<ActionEvent> {
         // Open an input stream to the audio file.
         String clipURL = "https://www.freesound.org/data/previews/41/41195_266274-lq.mp3";
 
-        AudioClip audio = new AudioClip(clipURL);
-        audio.play();
+        try {
+          AudioClip audio = new AudioClip(clipURL);
+          audio.play();
+        } catch (MediaException e) {
+          System.out.println("The audio could not be played because " + e.getMessage());
+        }
         System.out.println("Money dispensed.");
         View.primaryStage.setScene(MainMenu.mainMenu);
       }
