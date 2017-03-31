@@ -1,3 +1,6 @@
+/*
+ * Manages restrictions, getting, setting, and validating user input based on user-defined rules
+ */
 import java.util.ArrayList;
 
 public class UserInput {

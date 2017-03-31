@@ -9,6 +9,11 @@ import java.util.ArrayList;
 public class CustomerReceipt {
   ArrayList<CustomerTransaction> transactions = new ArrayList<CustomerTransaction>();
 
+  /**
+   * Adds a transaction to the end of the receipt
+   * 
+   * @param transaction The transaction to add
+   */
   public void addTransaction(CustomerTransaction transaction) {
     transactions.add(transaction);
   }

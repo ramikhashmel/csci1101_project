@@ -3,14 +3,22 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-// this is for the view class as well
+
 public abstract class Utilities {
   static Random rand = new Random();
+
   public static final boolean isDebugging = true;
   public static final String ATMName = "Brand New ATM";
+
+  // the denominations that the vault can hold
   public static final List<Integer> stdDenominations =
       new ArrayList<Integer>(Arrays.asList(50, 20, 10, 5));
 
+  /**
+   * Generates a random credit card number
+   * 
+   * @return A random credit card number
+   */
   static public String genRandCCNumber() {
     StringBuilder sb = new StringBuilder();
 
@@ -20,6 +28,13 @@ public abstract class Utilities {
     return sb.toString();
   }
 
+  /**
+   * Generates a random number
+   * 
+   * @param min The smallest number to generate
+   * @param max The maximum number to generate
+   * @return A random number between min and max, inclusive
+   */
   static public int randNumber(int min, int max) {
     return rand.nextInt(max) + min;
   }

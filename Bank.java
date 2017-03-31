@@ -1,3 +1,7 @@
+/*
+ * Contains information about the bank of the account. Used when printing receipts (so that the
+ * receipt format can be identified), and the UI of the app
+ */
 import java.util.ArrayList;
 
 public class Bank {

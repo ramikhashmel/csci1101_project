@@ -1,3 +1,7 @@
+/*
+ * The contact information for a user. Used to print on receipts, and to print out to the user for
+ * identification.
+ */
 public class ContactInformation {
   private String phoneNumber;
   private String address;

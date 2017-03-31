@@ -17,10 +17,10 @@ import javafx.stage.Stage;
 
 import java.io.*;
 
-public class WithdrawalCash implements EventHandler<ActionEvent> {
+public class WithdrawCash implements EventHandler<ActionEvent> {
   private final Account acc;
 
-  WithdrawalCash(Account acc) {
+  WithdrawCash(Account acc) {
     this.acc = acc;
   }
 

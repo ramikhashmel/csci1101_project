@@ -1,3 +1,6 @@
+/*
+ * The card that the user uses to authenticate to the ATM.
+ */
 public class Card {
   private String cardNumber;
   private String institution;
@@ -5,16 +8,14 @@ public class Card {
   private int cvv;
   private String pin;
 
-  private boolean isDebit;
-
-  public boolean equals(Card obj) {
-    return (cardNumber.equals(obj.cardNumber));
-  }
-
   private String cardholderName;
 
   public Card() {
 
+  }
+
+  public Card(String string) {
+    this.cardNumber = string;
   }
 
   public Card(String cardNumber, int cvv, String pin, String cardholderName) {
@@ -24,8 +25,8 @@ public class Card {
     this.cardholderName = cardholderName;
   }
 
-  public Card(String string) {
-    this.cardNumber = string;
+  public boolean equals(Card obj) {
+    return (cardNumber.equals(obj.cardNumber));
   }
 
   public String getCardNumber() {
@@ -48,16 +49,8 @@ public class Card {
     return pin;
   }
 
-  public boolean isDebit() {
-    return isDebit;
-  }
-
   public void setCvv(int cvv) {
     this.cvv = cvv;
-  }
-
-  public void setDebit(boolean isDebit) {
-    this.isDebit = isDebit;
   }
 
   public void setInstitution(String institution) {
@@ -68,12 +61,12 @@ public class Card {
     this.cardholderName = cardholderName;
   }
 
-  public void setPin(String string) {
-    this.pin = string;
-  }
-
   public void setNumber(String cardNumber) {
     this.cardNumber = cardNumber;
 
+  }
+
+  public void setPin(String string) {
+    this.pin = string;
   }
 }

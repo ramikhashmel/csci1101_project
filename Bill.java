@@ -1,13 +1,22 @@
+/*
+ * A bill, which contains a value and a serial number. These are deposited from the ATM, and are
+ * used in the vault.
+ */
 public class Bill {
   private int amount;
-  private String currency;
+
+  private enum CurrencyType {
+    CAD, US
+  };
+
+  private CurrencyType currency;
   private int serialNumber;
   private boolean isTorn;
 
   @Override
   public String toString() {
-    return "Bill [amount=" + amount + ", currency=" + currency + ", serialNumber=" + serialNumber
-        + ", isTorn=" + isTorn + "]";
+    return "Bill [amount=" + amount + ", currency=" + getCurrency() + ", serialNumber="
+        + serialNumber + ", isTorn=" + isTorn + "]";
   }
 
   public Bill(int amount) {
@@ -25,10 +34,10 @@ public class Bill {
   }
 
   public String getCurrency() {
-    return currency;
+    return currency.toString();
   }
 
-  public void setCurrency(String currency) {
+  public void setCurrency(CurrencyType currency) {
     this.currency = currency;
   }
 

@@ -1,3 +1,6 @@
+/*
+ * The model, which has most of the validation and logic checking methods
+ */
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,30 +10,38 @@ import javafx.scene.control.Label;
 public class Model {
   private static boolean isAuthenticated;
   ArrayList<Card> cards = new ArrayList<Card>();
+  // initial balance of $20,000
   int balance = 20000;
+
   static ArrayList<Account> accounts = new ArrayList<Account>();
+
   private Controller controller;
+
   private Vault vault = new Vault();
 
   public Model() {
+
+    // create a test account
     Account acc = new Account();
     acc.setAccountNumber(12345);
     acc.setBalance(1000);
     acc.setCard(new Card("1234567812341234"));
     acc.setName("Bob Jones");
     accounts.add(acc);
-    // read the credit card numbers from the file
-    cards.add(new Card("1234567891234567", 359, "1234", "Alex Fifield"));// user card(temp)
-    // temporary arraylist of cards
+
+    // create 25 random test cards
+    cards.add(new Card("1234567891234567", 359, "1234", "Alex Fifield"));
+
     for (int i = 0; i < 25; i++) {
       int firstHalf = (int) (Math.random() * 100000000);
       int secondHalf = (int) (Math.random() * 100000000);
       String number = firstHalf + "" + secondHalf;
       cards.add(new Card(number));
     }
-    // gets user input information
+
     cards.add(new Card("1234567812341234"));
 
+    // fill up vault with twenty twenties
     ArrayList<Bill> twenties = new ArrayList<Bill>();
     for (int i = 0; i < 20; i++) {
       twenties.add(new Bill(20));
@@ -43,6 +54,12 @@ public class Model {
     this.controller = controller;
   }
 
+  /**
+   * Checks if the card is valid
+   * 
+   * @param card The card
+   * @return Whether or not if the card is valid
+   */
   public boolean isValidCard(Card card) {
     for (int i = 0; i < cards.size(); i++) {
       if (card.equals(cards.get(i).getCardNumber())) {
@@ -69,7 +86,7 @@ public class Model {
     } else if (Vault.getTotal() < withdrawAmt) {
       withdraw.setText("The ATM does not have enough money to service your request.");
       return false;
-    } else if (withdrawAmt > acc.getCashLimitRemaining()) {
+    } else if (withdrawAmt > acc.getRemainingDailyWithdrawLimit()) {
       withdraw.setText("This withdraw would exceed your daily withdraw limit.");
       return false;
     } else
@@ -143,24 +160,20 @@ public class Model {
     return vault;
   }
 
-  public void openOutputDrawer() {
-    // TODO Auto-generated method stub
-
-  }
-
-  public void closeOutputDrawer() {
-    // TODO Auto-generated method stub
-
-  }
-
-  public static void setAuthenticated(boolean b) {
-    isAuthenticated = b;
+  public static void setAuthenticated(boolean isAuthenticated) {
+    Model.isAuthenticated = isAuthenticated;
   }
 
   public static boolean isAuthenticated() {
     return isAuthenticated;
   }
 
+  /**
+   * Finds an account from a card
+   * 
+   * @param card The card
+   * @return The account associated with the card. If no accounts were found, it returns null
+   */
   public static Account findAccount(Card card) {
     for (int i = 0; i < accounts.size(); i++) {
       if (accounts.get(i).getCard().equals(card)) {

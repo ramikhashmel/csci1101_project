@@ -1,3 +1,6 @@
+/*
+ * This is the bank account of the user
+ */
 public class Account {
   private int balance;
   private int accountNumber;
@@ -6,7 +9,7 @@ public class Account {
   private Card card;
   private ContactInformation contactInfo;
 
-  private int limit;
+  private int dailyWithdrawLimit;
 
   public int getAccountNumber() {
     return accountNumber;
@@ -48,12 +51,12 @@ public class Account {
     this.name = name;
   }
 
-  public void setCashLimit(int limit) {
-    this.limit = limit;
+  public void setDailyWithdrawLimit(int limit) {
+    this.dailyWithdrawLimit = limit;
   }
 
-  public int getCashLimitRemaining() {
-    return limit;
+  public int getRemainingDailyWithdrawLimit() {
+    return dailyWithdrawLimit;
   }
 
   public ContactInformation getContactInfo() {

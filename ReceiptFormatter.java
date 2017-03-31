@@ -1,3 +1,6 @@
+/*
+ * Creates different types of receipts for different banks
+ */
 import java.util.Date;
 
 public class ReceiptFormatter {
@@ -76,7 +79,7 @@ public class ReceiptFormatter {
     sb.append("FROM CHEQUING   ").append(this.acc.getAccountNumber()).append("\n\n");
     sb.append("ACCOUNT BALANCE $").append(this.acc.getBalance()).append("\n\n");
     sb.append("DAILY CANADIAN CASH LIMIT").append("\n");
-    sb.append("REMAINING   $").append(this.acc.getCashLimitRemaining());
+    sb.append("REMAINING   $").append(this.acc.getRemainingDailyWithdrawLimit());
     return sb.toString();
   }
 

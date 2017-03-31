@@ -46,6 +46,11 @@ public class Vault {
     return null;
   }
 
+  /**
+   * Gets the total dollar value of all of the bills in the vault
+   * 
+   * @return
+   */
   public static int getTotal() {
     return (fives.size() * 5 + tens.size() * 10 + twenties.size() * 20 + fifties.size() * 50);
   }

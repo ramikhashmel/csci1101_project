@@ -1,3 +1,6 @@
+/*
+ * The main menu that the user sees after authenticating
+ */
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -31,15 +34,18 @@ final class MainMenu implements EventHandler<ActionEvent> {
     verifyCard(cardNumberField, pinField, actiontarget);
 
     if (Model.isAuthenticated()) {
+      // create a new card from the user entered values
       Card card = new Card();
       card.setNumber(this.cardNumberField.getText());
       card.setPin(this.pinField.getText());
 
+      // lookup the account associated with card
       Account acc = Model.findAccount(card);
 
       Stage primaryStage = View.primaryStage;
       primaryStage.setTitle(Utilities.ATMName + " - Menu");
 
+      // initialize GUI
       GridPane grid = new GridPane();
       grid.setAlignment(Pos.CENTER);
       grid.setHgap(10);
@@ -86,7 +92,7 @@ final class MainMenu implements EventHandler<ActionEvent> {
       grid.add(txt, 1, 0);
       grid.add(vbButtons, 0, 0);
       grid.add(vbButtons2, 2, 0);
-      cashWithdraw.setOnAction(new WithdrawalCash(acc));
+      cashWithdraw.setOnAction(new WithdrawCash(acc));
       primaryStage.setScene(scene);
       primaryStage.show();
       fastCash.setOnAction(j -> fashCashView());
@@ -124,7 +130,7 @@ final class MainMenu implements EventHandler<ActionEvent> {
     ViewEventResult event =
         View.controller.verifyCCNumber(cardNumberField.getText(), pinField.getText());
     if (event == null || !event.didSucceed()) {
-      // card is invalid
+      // card is invalid; clear pin and card number fields
       cardNumberField.clear();
       pinField.clear();
       if (event.getMessage() != null) {
