@@ -3,17 +3,13 @@ public class Account {
   private int accountNumber;
   private int depositNum;
   private String name;
-  private String address;
   private Card card;
-  private String phoneNumber;
+  private ContactInformation contactInfo;
+
   private int limit;
 
   public int getAccountNumber() {
     return accountNumber;
-  }
-
-  public String getAddress() {
-    return address;
   }
 
   public int getBalance() {
@@ -32,16 +28,8 @@ public class Account {
     return name;
   }
 
-  public String getPhoneNumber() {
-    return phoneNumber;
-  }
-
   public void setAccountNumber(int accountNumber) {
     this.accountNumber = accountNumber;
-  }
-
-  public void setAddress(String address) {
-    this.address = address;
   }
 
   public void setBalance(int balance) {
@@ -58,10 +46,6 @@ public class Account {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
   }
 
   public void setCashLimit(int limit) {
