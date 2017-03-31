@@ -29,4 +29,9 @@ public abstract class Transaction {
     this.transDate = transDate;
   }
 
+  public float getAmount() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
 }
