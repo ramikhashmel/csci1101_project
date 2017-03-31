@@ -13,11 +13,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.media.AudioClip;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.media.AudioClip;
 
 // http://www.austintek.com/mvc/#austintek_mvc.view_2
 
@@ -135,10 +135,15 @@ public class View extends Application {
 
   public EventHandler<ActionEvent> handleCard(TextField cardNumberField, PasswordField pinField,
       Node n, Button signIn) {
+    String pinButtonNumber = ((Button) n).getText();
+
+    // enter in the credit card number, then automatically switch
+    // to the pin pad if the credit card number field gets to the
+    // desired length
     if (cardNumberField.getLength() < 16) {
-      cardNumberField.appendText((((Button) n).getText()));
+      cardNumberField.appendText(pinButtonNumber);
     } else if (pinField.getLength() < 4) {
-      pinField.appendText(((((Button) n).getText())));
+      pinField.appendText(pinButtonNumber);
     } else {
       signIn.setVisible(true);
     }
