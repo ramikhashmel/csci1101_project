@@ -8,8 +8,6 @@ public interface ReceiptFormatter {
 
   Date getDate();
 
-  void setDate(Date date);
-
   TransactionType getTransType();
 
   void setTransType(TransactionType transType);

@@ -1,38 +1,33 @@
 /*
  * Creates different types of receipts for different banks
  */
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import java.util.Date;
 
 public class CIBCReceipt implements ReceiptFormatter {
 
-  private String machineID = "";
+  private final SimpleDateFormat dateFormat;
+  private String machineID = null;
   private Date date;
   private String appID = "";
   private TransactionType transType;
   private Account acc;
   private Transaction trans;
-  private int refNumber;
-  
-  public void setMachineID(String machineID) {
-    this.machineID = machineID;
-  }
+  private Integer refNumber = null;
 
+  public CIBCReceipt() {
+    this.machineID = String.valueOf(Utilities.randNumber(1000, 9999));
+    this.date = new Date();
+    this.appID = String.valueOf(Utilities.randNumber(1000,9999));
+    this.refNumber = Utilities.randNumber(100000,9999999);
+
+    // e.g. MAR28 17 AT 16:20
+    this.dateFormat = new SimpleDateFormat("MMMdd yy 'AT' HH:mm");
+  }
   @Override
   public Date getDate() {
     return date;
-  }
-
-  @Override
-  public void setDate(Date date) {
-    this.date = date;
-  }
-
-  public String getAppID() {
-    return appID;
-  }
-
-  public void setAppID(String appID) {
-    this.appID = appID;
   }
 
   @Override
@@ -61,7 +56,7 @@ public class CIBCReceipt implements ReceiptFormatter {
     sb.append("Here is your recent ATM transaction receipt.\n\n");
     sb.append("MACHINE ID  ").append(this.getMachineID()).append("\n\n");
     sb.append("CARD NUMBER ").append(acc.getCard().getCardNumber().toString()).append("\n\n");
-    sb.append(date.getMonth()).append(date.getDay()).append(" AT ").append(date.getHours());
+    sb.append(dateFormat.format(date));
     sb.append(":").append(date.getMinutes()).append("   REF # " + this.getRefNumber());
     sb.append("\n\n");
     sb.append(this.getTransType().toString()).append("   $").append(this.trans.getAmount());
@@ -77,11 +72,7 @@ public class CIBCReceipt implements ReceiptFormatter {
     return this.refNumber;
   }
 
-  public void setRefNumber(int refNumber) {
-    this.refNumber = refNumber;
-  }
-
-  public String getMachineID() {
+  private String getMachineID() {
     return machineID;
   }
 }
