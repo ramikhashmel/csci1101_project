@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -53,18 +51,6 @@ public class View extends Application {
 
   public Card getCard() {
     return card;
-  }
-
-  private void handleWithdrawOrDepositScreen() {
-    System.out.println("Hello, " + getCard().getName() + "!");
-    InputRestriction depositOrWithdraw = new InputRestriction();
-
-    ArrayList<String> options = new ArrayList<String>();
-    options.add("withdraw");
-    options.add("deposit");
-
-    depositOrWithdraw.setOptions(options);
-    String userInput = UserInput.getString("Deposit or withdraw?", depositOrWithdraw);
   }
 
   public void setCard(Card card) {
@@ -152,17 +138,6 @@ public class View extends Application {
   }
 
   public void update(ViewState state) {
-    // this would fire when the input does not have to be restricted
-    System.out.println("update() called with new view state " + state.name());
 
-    switch (state) {
-      case CARD_AUTHENTICATED:
-        handleWithdrawOrDepositScreen();
-        break;
-      case CARD_INVALID:
-        break;
-      default:
-        break;
-    }
   }
 }
