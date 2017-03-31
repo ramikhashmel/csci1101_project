@@ -27,16 +27,8 @@ public class Controller {
     return model.getBank();
   }
 
-  public void setBank(Bank bank) {
-    model.setBank(bank);
-  }
-
   public Vault getVault() {
     return model.getVault();
-  }
-
-  public void setVault(Vault vault) {
-    model.setVault(vault);
   }
 
   public Account findAccount(Card card) {
