@@ -20,6 +20,7 @@ final class MainMenu implements EventHandler<ActionEvent> {
   private final TextField cardNumberField;
   private final PasswordField pinField;
   private final Text actiontarget;
+  private Controller controller = ATM.getController();
 
   public static Scene mainMenu;
 
@@ -33,14 +34,14 @@ final class MainMenu implements EventHandler<ActionEvent> {
   public void handle(ActionEvent e) {
     verifyCard(cardNumberField, pinField, actiontarget);
 
-    if (Model.isAuthenticated()) {
+    if (controller.isAuthenticated()) {
       // create a new card from the user entered values
       Card card = new Card();
       card.setNumber(this.cardNumberField.getText());
       card.setPin(this.pinField.getText());
 
       // lookup the account associated with card
-      Account acc = Model.findAccount(card);
+      Account acc = controller.findAccount(card);
 
       Stage primaryStage = View.primaryStage;
       primaryStage.setTitle(Utilities.ATMName + " - Menu");
@@ -128,7 +129,7 @@ final class MainMenu implements EventHandler<ActionEvent> {
 
     // get the text from the GUI, and see if the pin is valid or not
     ViewEventResult event =
-        View.controller.verifyCCNumber(cardNumberField.getText(), pinField.getText());
+        controller.verifyCCNumber(cardNumberField.getText(), pinField.getText(), View.controller);
     if (event == null || !event.didSucceed()) {
       // card is invalid; clear pin and card number fields
       cardNumberField.clear();
@@ -136,12 +137,12 @@ final class MainMenu implements EventHandler<ActionEvent> {
       if (event.getMessage() != null) {
         actiontarget.setText(event.getMessage());
       }
-      Model.setAuthenticated(false);
+      controller.setAuthenticated(false);
       return false;
     } else {
       // card is valid
       actiontarget.setText(event.getMessage());
-      Model.setAuthenticated(true);
+      controller.setAuthenticated(true);
       return true;
     }
   }

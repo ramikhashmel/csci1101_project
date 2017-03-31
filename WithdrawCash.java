@@ -1,6 +1,8 @@
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 
+import java.util.Map;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -21,9 +23,101 @@ import javafx.stage.Stage;
 public class WithdrawCash implements EventHandler<ActionEvent> {
 
   private final Account acc;
+  private Controller controller = ATM.getController();
 
   WithdrawCash(Account acc) {
     this.acc = acc;
+  }
+
+  /**
+   * Checks if the withdraw amount is possible or not, by checking the user's account and how much
+   * money is left in the ATM, and what denominations are available.
+   *
+   * @param acc The user's account
+   * @param withdrawAmt The withdraw amount
+   * @return Whether or not the transaction can be completed
+   */
+  public WithdrawResult checkIfPossibleToWithdraw(Account acc, float withdrawAmt, Label withdraw) {
+    WithdrawResult result = new WithdrawResult();
+    if (withdrawAmt != (int) withdrawAmt) {
+      result.setErrorMessage(String
+          .format("You cannot withdraw coins. However, you can withdraw %d instead.", withdrawAmt));
+      return result;
+    } else if (controller.getVault().getTotal() < withdrawAmt) {
+      result.setErrorMessage("The ATM does not have enough money to service your request.");
+      return result;
+    } else if (withdrawAmt > acc.getRemainingDailyWithdrawLimit()) {
+      result.setErrorMessage("This withdraw would exceed your daily withdraw limit.");
+      return result;
+    } else
+      return uncheckedWithdraw(withdrawAmt);
+  }
+
+  /**
+   * Checks if it is possible to withdraw, but does not check the status of the vault, the user's
+   * cash limit, or if the amount is valid
+   *
+   * @param withdrawAmt The amount to withdraw
+   * @return Whether or not the value can be withdrawn, and if it can, returns the bills that need
+   *         to be withdrawn from the vault
+   */
+  private WithdrawResult uncheckedWithdraw(float withdrawAmt) {
+    WithdrawResult result = new WithdrawResult();
+
+    // get the data from the vault and see how many of each denomination
+    // we have
+    Map<Integer, Integer> denominationsAvailable = new HashMap<>();
+    denominationsAvailable.put(50, controller.getVault().getNumOfFifties());
+    denominationsAvailable.put(20, controller.getVault().getNumOfTwenties());
+    denominationsAvailable.put(10, controller.getVault().getNumOfTens());
+    denominationsAvailable.put(5, controller.getVault().getNumOfFives());
+
+    int runningWithdraw = (int) withdrawAmt;
+
+    Map<Integer, Integer> withdrawDenominations = new HashMap<>();
+
+    /*
+     * Iterate through all of the bills, and subtract the largest possible bill as many times as
+     * possible from the user's withdraw amount.
+     */
+    for (int i = 0; i < Utilities.stdDenominations.size(); i++) {
+      int currBillVal = Utilities.stdDenominations.get(i);
+      int numOfNeededBills = runningWithdraw / currBillVal;
+
+      if (numOfNeededBills <= denominationsAvailable.get(currBillVal)) {
+        withdrawDenominations.put(currBillVal, numOfNeededBills);
+        runningWithdraw = runningWithdraw - (numOfNeededBills * currBillVal);
+      } else {
+        withdrawDenominations.put(currBillVal, 0);
+      }
+    }
+
+    // if the amount that remains is zero, then we can make a withdraw
+    if (runningWithdraw == 0) {
+      // user can withdraw money because enough denominations exist
+      // calculate how many bills they should withdraw
+      result.setWithdrawAmount(withdrawDenominations);
+      System.out.println("$50 x " + withdrawDenominations.get(50));
+      System.out.println("$20 x " + withdrawDenominations.get(20));
+      System.out.println("$10 x " + withdrawDenominations.get(10));
+      System.out.println("$5 x " + withdrawDenominations.get(5));
+      result.setDidSucceed(true);
+      return result;
+    } else if (runningWithdraw > 0) {
+      /*
+       * There was a remainder left from calculating the bills, so the remainder cannot be
+       * withdrawn. Subtract the remainder from the user's withdraw amount and ask if they'd like to
+       * have that out instead.
+       */
+      result.setErrorMessage("You can't withdraw that amount. Would you like to withdraw $"
+          + (withdrawAmt - runningWithdraw) + " instead?");
+      return result;
+    } else {
+      // there's no money left in the ATM, or a fatal calculation
+      // error occurred
+      result.setErrorMessage("An unknown error occurred.");
+      return result;
+    }
   }
 
   @Override
@@ -71,10 +165,9 @@ public class WithdrawCash implements EventHandler<ActionEvent> {
       try {
         withdrawFunds(Float.valueOf(withdrawAmountField.getText()), acc, withdrawAmount);
       } catch (NumberFormatException e1) {
-        // TODO Auto-generated catch block
+        System.out.println("The number was formatted incorrectly.");
         e1.printStackTrace();
       } catch (IOException e1) {
-        // TODO Auto-generated catch block
         e1.printStackTrace();
       }
     });
@@ -87,7 +180,7 @@ public class WithdrawCash implements EventHandler<ActionEvent> {
   private EventHandler<ActionEvent> withdrawFunds(float withdrawAmt, Account acc,
       Label withdrawAmount) throws IOException {
     if (acc != null) {
-      WithdrawResult result = Model.checkIfPossibleToWithdraw(acc, withdrawAmt, withdrawAmount);
+      WithdrawResult result = checkIfPossibleToWithdraw(acc, withdrawAmt, withdrawAmount);
       if (result.didSucceed())
         dispenseCash(withdrawAmt, result);
       else
@@ -101,23 +194,24 @@ public class WithdrawCash implements EventHandler<ActionEvent> {
     // http://stackoverflow.com/questions/24097059/
 
     for (int i : result.getWithdrawAmount().keySet()) {
-      for (Iterator<Bill> billsIter = Vault.getDenominationValue(i); billsIter.hasNext(); ) {
+      for (Iterator<Bill> billsIter = controller.getVault().getDenominationValue(i); billsIter.hasNext(); ) {
         Bill item = billsIter.next();
         System.out.println(item.toString() + " bill being dispensed...");
         billsIter.remove();
       }
     }
+    playAudioFromURL("https://www.freesound.org/data/previews/41/41195_266274-lq.mp3");
 
-    // Open an input stream to the audio file.
-    String clipURL = "https://www.freesound.org/data/previews/41/41195_266274-lq.mp3";
+    System.out.println("Money dispensed.");
+    View.primaryStage.setScene(MainMenu.mainMenu);
+  }
 
+  private void playAudioFromURL(String clipURL) {
     try {
       AudioClip audio = new AudioClip(clipURL);
       audio.play();
     } catch (MediaException e) {
       System.out.println("The audio could not be played because " + e.getMessage());
     }
-    System.out.println("Money dispensed.");
-    View.primaryStage.setScene(MainMenu.mainMenu);
   }
 }

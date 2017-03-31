@@ -2,24 +2,21 @@
  * The model, which has most of the validation and logic checking methods
  */
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import javafx.scene.control.Label;
 
 public class Model {
   private static boolean isAuthenticated;
-  ArrayList<Card> cards = new ArrayList<Card>();
-  // initial balance of $20,000
-  int balance = 20000;
-
-  static ArrayList<Account> accounts = new ArrayList<Account>();
-
-  private Controller controller;
-
-  private Vault vault = new Vault();
+  private ArrayList<Account> accounts;
+  private Bank bank;
+  private ArrayList<Card> cards;
+  private Vault vault;
 
   public Model() {
+    // initialize fields
+    this.accounts = new ArrayList<>();
+    this.bank = new Bank();
+    this.isAuthenticated = false;
+    this.cards = new ArrayList();
+    this.vault = new Vault();
 
     // create a test account
     Account acc = new Account();
@@ -47,145 +44,78 @@ public class Model {
       twenties.add(new Bill(20));
     }
 
-    Vault.addTwenties(twenties);
-  }
-
-  public void addController(Controller controller) {
-    this.controller = controller;
+    this.getVault().addTwenties(twenties);
   }
 
   /**
    * Checks if the card is valid
-   * 
+   *
    * @param card The card
    * @return Whether or not if the card is valid
    */
   public boolean isValidCard(Card card) {
-    for (int i = 0; i < cards.size(); i++) {
-      if (card.equals(cards.get(i).getCardNumber())) {
+    for (int i = 0; i < getCards().size(); i++) {
+      if (card.equals(getCards().get(i).getCardNumber())) {
         return true;
       }
     }
     return false;
   }
 
-
-  /**
-   * Checks if the withdraw amount is possible or not, by checking the user's account and how much
-   * money is left in the ATM, and what denominations are available.
-   * 
-   * @param acc The user's account
-   * @param withdrawAmt The withdraw amount
-   * @return Whether or not the transaction can be completed
-   */
-  public static WithdrawResult checkIfPossibleToWithdraw(Account acc, float withdrawAmt, Label withdraw) {
-    WithdrawResult result = new WithdrawResult();
-    if (withdrawAmt != (int) withdrawAmt) {
-      result.setErrorMessage(String
-          .format("You cannot withdraw coins. However, you can withdraw %d instead.", withdrawAmt));
-      return result;
-    } else if (Vault.getTotal() < withdrawAmt) {
-      result.setErrorMessage("The ATM does not have enough money to service your request.");
-      return result;
-    } else if (withdrawAmt > acc.getRemainingDailyWithdrawLimit()) {
-      result.setErrorMessage("This withdraw would exceed your daily withdraw limit.");
-      return result;
-    } else
-      return uncheckedWithdraw(withdrawAmt, withdraw);
-  }
-
-  /**
-   * Checks if it is possible to withdraw, but does not check the status of the vault, the user's
-   * cash limit, or if the amount is valid
-   * 
-   * @param withdrawAmt The amount to withdraw
-   * @param withdraw The withdraw label
-   * @return Whether or not the value can be withdrawn, and if it can, returns the bills that need
-   *         to be withdrawn from the vault
-   */
-  private static WithdrawResult uncheckedWithdraw(float withdrawAmt, Label withdraw) {
-    WithdrawResult result = new WithdrawResult();
-
-    // get the data from the vault and see how many of each denomination
-    // we have
-    Map<Integer, Integer> denominationsAvailable = new HashMap<>();
-    denominationsAvailable.put(50, Vault.getNumOfFifties());
-    denominationsAvailable.put(20, Vault.getNumOfTwenties());
-    denominationsAvailable.put(10, Vault.getNumOfTens());
-    denominationsAvailable.put(5, Vault.getNumOfFives());
-
-    int runningWithdraw = (int) withdrawAmt;
-
-    Map<Integer, Integer> withdrawDenominations = new HashMap<Integer, Integer>();
-
-    /*
-     * Iterate through all of the bills, and subtract the largest possible bill as many times as
-     * possible from the user's withdraw amount.
-     */
-    for (int i = 0; i < Utilities.stdDenominations.size(); i++) {
-      int currBillVal = Utilities.stdDenominations.get(i);
-      int numOfNeededBills = runningWithdraw / currBillVal;
-
-      if (numOfNeededBills <= denominationsAvailable.get(currBillVal)) {
-        withdrawDenominations.put(currBillVal, numOfNeededBills);
-        runningWithdraw = runningWithdraw - (numOfNeededBills * currBillVal);
-      } else {
-        withdrawDenominations.put(currBillVal, 0);
-      }
-    }
-
-    // if the amount that remains is zero, then we can make a withdraw
-    if (runningWithdraw == 0) {
-      // user can withdraw money because enough denominations exist
-      // calculate how many bills they should withdraw
-      result.setWithdrawAmount(withdrawDenominations);
-      System.out.println("$50 x " + withdrawDenominations.get(50));
-      System.out.println("$20 x " + withdrawDenominations.get(20));
-      System.out.println("$10 x " + withdrawDenominations.get(10));
-      System.out.println("$5 x " + withdrawDenominations.get(5));
-      result.setDidSucceed(true);
-      return result;
-    } else if (runningWithdraw > 0) {
-      /*
-       * There was a remainder left from calculating the bills, so the remainder cannot be
-       * withdrawn. Subtract the remainder from the user's withdraw amount and ask if they'd like to
-       * have that out instead.
-       */
-      result.setErrorMessage("You can't withdraw that amount. Would you like to withdraw $"
-          + (withdrawAmt - runningWithdraw) + " instead?");
-      return result;
-    } else {
-      // there's no money left in the ATM, or a fatal calculation
-      // error occurred
-      result.setErrorMessage("An unknown error occurred.");
-      return result;
-    }
-  }
-
-  public Vault getVault() {
-    return vault;
-  }
-
-  public static void setAuthenticated(boolean isAuthenticated) {
-    Model.isAuthenticated = isAuthenticated;
-  }
-
-  public static boolean isAuthenticated() {
+  public boolean isAuthenticated() {
     return isAuthenticated;
+  }
+
+  public void setAuthenticated(boolean isAuthenticated) {
+    Model.isAuthenticated = isAuthenticated;
   }
 
   /**
    * Finds an account from a card
-   * 
+   *
    * @param card The card
    * @return The account associated with the card. If no accounts were found, it returns null
    */
-  public static Account findAccount(Card card) {
+  public Account findAccount(Card card) {
     for (int i = 0; i < accounts.size(); i++) {
       if (accounts.get(i).getCard().equals(card)) {
         return accounts.get(i);
       }
     }
     return null;
+  }
+
+  public ViewEventResult verifyCCNumber(String ccNumber, String pin, Controller controller) {
+    Card card = new Card();
+    card.setNumber(ccNumber);
+    card.setPin(pin);
+
+    if (isValidCard(card)) {
+      return new ViewEventResult(true, "Card is valid");
+    } else {
+      return new ViewEventResult(false, "Card is invalid, try again.");
+    }
+  }
+
+  public Bank getBank() {
+    return bank;
+  }
+
+  public void setBank(Bank bank) {
+    this.bank = bank;
+  }
+
+  public Vault getVault() {
+    return vault;
+  }
+
+  public void setVault(Vault vault) {
+    this.vault = vault;
+  }
+
+  public void writeTransactionToFile(Transaction trans) {}
+
+  public ArrayList<Card> getCards() {
+    return cards;
   }
 }

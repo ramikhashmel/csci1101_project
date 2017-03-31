@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class ATM {
   static Scanner kb = new Scanner(System.in);
   private static String atmID = "0078P";
+  private static Controller controller;
 
   public static String getID() {
     return atmID;
@@ -14,7 +15,7 @@ public class ATM {
     // create the mvc
     View view = new View();
     Model model = new Model();
-    Controller controller = new Controller();
+    controller = new Controller();
 
     // register them with each other
     controller.addView(view);
@@ -25,4 +26,7 @@ public class ATM {
     View.initialize(args);
   }
 
+  public static Controller getController() {
+    return controller;
+  }
 }

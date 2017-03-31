@@ -1,5 +1,4 @@
 public class Controller {
-  Bank bank;
   View view;
   Model model;
   CustomerReceipt custReceipt = new CustomerReceipt();
@@ -12,29 +11,39 @@ public class Controller {
     this.view = view;
   }
 
-  public void dispenseCash(double amount) {
-    if (model.getVault().withdraw(amount)) {
-      view.update(ViewState.WITHDRAW_SUCCESS);
-    } else {
-      view.update(ViewState.WITHDRAW_ERROR);
-    }
-  }
-
-  public ViewEventResult verifyCCNumber(String ccNumber, String pin) {
-    Card card = new Card();
-    card.setNumber(ccNumber);
-    card.setPin(pin);
-
-    if (model.isValidCard(card)) {
-      return new ViewEventResult(true, "Card is valid");
-    } else {
-      return new ViewEventResult(false, "Card is invalid, try again.");
-    }
-  }
-
-  public void writeTransactionToFile(Transaction trans) {}
-
   public void initialize() {
     view.askUserForCard();
+  }
+
+  public boolean isAuthenticated() {
+    return model.isAuthenticated();
+  }
+
+  public void setAuthenticated(boolean isAuthenticated) {
+    model.setAuthenticated(isAuthenticated);
+  }
+
+  public Bank getBank() {
+    return model.getBank();
+  }
+
+  public void setBank(Bank bank) {
+    model.setBank(bank);
+  }
+
+  public Vault getVault() {
+    return model.getVault();
+  }
+
+  public void setVault(Vault vault) {
+    model.setVault(vault);
+  }
+
+  public Account findAccount(Card card) {
+    return model.findAccount(card);
+  }
+
+  public ViewEventResult verifyCCNumber(String text, String text1, Controller controller) {
+    return model.verifyCCNumber(text, text1, controller);
   }
 }

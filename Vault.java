@@ -5,42 +5,42 @@ import java.util.Iterator;
 import java.util.ListIterator;
 
 public class Vault {
-  private static ArrayList<Bill> fives = new ArrayList<Bill>();
-  private static ArrayList<Bill> tens = new ArrayList<Bill>();
-  private static ArrayList<Bill> twenties = new ArrayList<Bill>();
-  private static ArrayList<Bill> fifties = new ArrayList<Bill>();
+  private ArrayList<Bill> fives = new ArrayList<>();
+  private ArrayList<Bill> tens = new ArrayList<>();
+  private ArrayList<Bill> twenties = new ArrayList<>();
+  private ArrayList<Bill> fifties = new ArrayList<>();
 
-  public static ListIterator<Bill> getFifties(int amt) {
+  public ListIterator<Bill> getFifties(int amt) {
     if (fifties.size() * 50 >= amt) {
       return fifties.listIterator(fifties.size() - amt);
     }
     return null;
   }
 
-  public static ListIterator<Bill> getFives(int amt) {
+  public ListIterator<Bill> getFives(int amt) {
     if (fives.size() * 5 >= amt) {
       return fives.listIterator(fives.size() - amt);
     }
     return null;
   }
 
-  public static int getNumOfFifties() {
+  public int getNumOfFifties() {
     return fifties.size();
   }
 
-  public static int getNumOfFives() {
+  public int getNumOfFives() {
     return fives.size();
   }
 
-  public static int getNumOfTens() {
+  public int getNumOfTens() {
     return tens.size();
   }
 
-  public static int getNumOfTwenties() {
+  public int getNumOfTwenties() {
     return twenties.size();
   }
 
-  public static ListIterator<Bill> getTens(int amt) {
+  public ListIterator<Bill> getTens(int amt) {
     if (tens.size() * 10 >= amt) {
       return tens.listIterator(tens.size() - amt);
     }
@@ -52,39 +52,34 @@ public class Vault {
    * 
    * @return
    */
-  public static int getTotal() {
+  public int getTotal() {
     return (fives.size() * 5 + tens.size() * 10 + twenties.size() * 20 + fifties.size() * 50);
   }
 
-  public static ListIterator<Bill> getTwenties(int amt) {
+  public ListIterator<Bill> getTwenties(int amt) {
     if (twenties.size() * 20 >= amt) {
       return twenties.listIterator(twenties.size() - amt);
     }
     return null;
   }
 
-  public static void addFifties(ArrayList<Bill> fifties) {
-    Vault.fifties.addAll(fifties);
+  public void addFifties(ArrayList<Bill> fifties) {
+    this.fifties.addAll(fifties);
   }
 
-  public static void addFives(ArrayList<Bill> fives) {
-    Vault.fives.addAll(fives);
+  public void addFives(ArrayList<Bill> fives) {
+    this.fives.addAll(fives);
   }
 
-  public static void addTens(ArrayList<Bill> tens) {
-    Vault.tens.addAll(tens);
+  public void addTens(ArrayList<Bill> tens) {
+    this.tens.addAll(tens);
   }
 
-  public static void addTwenties(ArrayList<Bill> twenties) {
-    Vault.twenties.addAll(twenties);
+  public void addTwenties(ArrayList<Bill> twenties) {
+    this.twenties.addAll(twenties);
   }
 
-  public boolean withdraw(double amount) {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  public static Iterator<Bill> getDenominationValue(int i) {
+  public Iterator<Bill> getDenominationValue(int i) {
     switch (i) {
       case 5:
         return getFives(i);
