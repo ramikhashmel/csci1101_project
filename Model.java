@@ -55,7 +55,8 @@ public class Model {
    */
   public boolean isValidCard(Card card) {
     for (int i = 0; i < getCards().size(); i++) {
-      if (card.equals(getCards().get(i).getCardNumber())) {
+      Card dbCards = getCards().get(i);
+      if (dbCards.getCardNumber().equals(card.getCardNumber()) && dbCards.getPin().equals(card.getPin())) {
         return true;
       }
     }
