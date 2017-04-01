@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.AudioClip;
@@ -85,39 +86,46 @@ public class View extends Application {
 
     grid.add(pinPad, 0, 10);
 
-    Text scenetitle = new Text("Enter Account Information");
-    scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-    grid.getChildren().add(scenetitle);
-
-    Label cardNumber = new Label("Card Number:");
-    grid.add(cardNumber, 0, 1);
-
     final TextField cardNumberField = new TextField();
-    grid.add(cardNumberField, 1, 1);
-
-    Label pin = new Label("PIN:");
-    grid.add(pin, 0, 2);
+    //grid.add(cardNumberField, 1, 1);
 
     final PasswordField pinField = new PasswordField();
-    grid.add(pinField, 1, 2);
+    grid.add(pinField, 0, 3);
+    pinField.setId("pinField");
 
-    Button signIn = new Button("Go");
-    HBox hbBtn = new HBox(10);
-    hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
-    hbBtn.getChildren().add(signIn);
-    grid.add(hbBtn, 1, 4);
+    Button signIn = new Button();
+    signIn.setId("goButton");
+    grid.add(signIn, 0, 4);
 
     final Text actiontarget = new Text();
-    actiontarget.setText("ERROR_MSG_HERE");
-    grid.add(actiontarget, 1, 3);
+    actiontarget.setText("");
+    grid.add(actiontarget, 0, 3);
 
     signIn.setOnAction(new MainMenu(cardNumberField, pinField, actiontarget));
     for (Node n : pinPad.getChildren()) {
       n.setOnMouseClicked(f -> handleCard(cardNumberField, pinField, n, signIn));
     }
     button.setOnAction(new PinPadView());
+
+    // restrict pin pad to four characters
+    pinField.setOnKeyReleased(
+        new EventHandler<KeyEvent>() {
+          @Override
+          public void handle(KeyEvent event) {
+            System.out.println(pinField.getText());
+            if (pinField.getText().length() == 4) {
+              signIn.setDisable(false);
+            } else if (pinField.getText().length() > 4) {
+              pinField.setText(pinField.getText().substring(0, 4));
+            } else {
+              signIn.setDisable(true);
+            }
+          }
+        }
+    );
     signIn.setDisable(true);
     primaryStage.setScene(scene);
+    scene.getStylesheets().add(View.class.getResource("style.css").toExternalForm());
     primaryStage.show();
   }
 
