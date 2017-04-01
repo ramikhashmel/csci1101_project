@@ -8,11 +8,16 @@
 
 #goButton {
     -fx-background-image: url("enter_button.png");
+    -fx-background-color: transparent;
     -fx-background-repeat:no-repeat;
     -fx-background-size: cover;
     -fx-background-position: center center;
-    -fx-pref-width:577px;
+    -fx-pref-width:589px;
     -fx-pref-height:142px;
+    -fx-border: none;
+    -fx-padding: 0px;
+    -fx-focus-color: transparent;
+    -fx-background-insets: 0;
 }
 
 #pinField {
@@ -23,10 +28,10 @@
   -fx-font-size:60px;
   -fx-padding:50px;
   -fx-color:#141366;
--fx-display-caret: false;
--fx-padding: 70px;
-    -fx-border-insets: 70px;
-    -fx-background-insets: 70px;
+  -fx-display-caret: false;
+  -fx-padding: 70px;
+  -fx-border-insets: 70px;
+  -fx-background-insets: 70px;
 }
 
 .button{

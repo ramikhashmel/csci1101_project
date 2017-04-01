@@ -1,6 +1,8 @@
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -9,7 +11,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.AudioClip;
@@ -95,6 +99,7 @@ public class View extends Application {
 
     Button signIn = new Button();
     signIn.setId("goButton");
+    
     grid.add(signIn, 0, 4);
 
     final Text actiontarget = new Text();
@@ -134,12 +139,9 @@ public class View extends Application {
       Node n, Button signIn) {
     String pinButtonNumber = ((Button) n).getText();
 
-    // enter in the credit card number, then automatically switch
-    // to the pin pad if the credit card number field gets to the
-    // desired length
-    if (cardNumberField.getLength() < 16) {
-      cardNumberField.appendText(pinButtonNumber);
-    } else if (pinField.getLength() <= 3) {
+    // keep the sign in button disabled if the pin is not
+    // long enough
+    if (pinField.getLength() <= 3) {
       pinField.appendText(pinButtonNumber);
     } else {
       signIn.setDisable(false);
