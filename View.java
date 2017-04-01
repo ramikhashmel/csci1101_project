@@ -70,34 +70,36 @@ public class View extends Application {
 
     GridPane grid = new GridPane();
     grid.setAlignment(Pos.CENTER);
-    grid.setHgap(10);
-    grid.setVgap(10);
-    grid.setPadding(new Insets(25, 25, 25, 25));
 
-    Scene scene = new Scene(grid, 600, 400);
+    Scene scene = new Scene(grid, 640, 480);
+    primaryStage.setResizable(false);
 
+    GridPane pinPad = new GridPane();
     for (int i = 0; i < 12; i++) {
       button = new Button(keys[i]);
       button.getStyleClass().add("num-button");
-      grid.add(button, i % 3, (int) Math.ceil(i / 3));
+      pinPad.add(button, i % 3, (int) Math.ceil(i / 3));
 
     }
+    pinPad.setPadding(new Insets(10,10,10,10));
+
+    grid.add(pinPad, 0, 10);
 
     Text scenetitle = new Text("Enter Account Information");
     scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-    grid.add(scenetitle, 4, 0, 1, 1);
+    grid.getChildren().add(scenetitle);
 
     Label cardNumber = new Label("Card Number:");
-    grid.add(cardNumber, 5, 0);
+    grid.add(cardNumber, 0, 1);
 
     final TextField cardNumberField = new TextField();
-    grid.add(cardNumberField, 5, 1);
+    grid.add(cardNumberField, 1, 1);
 
     Label pin = new Label("PIN:");
-    grid.add(pin, 5, 2);
+    grid.add(pin, 0, 2);
 
     final PasswordField pinField = new PasswordField();
-    grid.add(pinField, 5, 3);
+    grid.add(pinField, 1, 2);
 
     Button signIn = new Button("Go");
     HBox hbBtn = new HBox(10);
@@ -106,14 +108,15 @@ public class View extends Application {
     grid.add(hbBtn, 1, 4);
 
     final Text actiontarget = new Text();
-    grid.add(actiontarget, 1, 6);
+    actiontarget.setText("ERROR_MSG_HERE");
+    grid.add(actiontarget, 1, 3);
 
     signIn.setOnAction(new MainMenu(cardNumberField, pinField, actiontarget));
-    for (Node n : grid.getChildren()) {
+    for (Node n : pinPad.getChildren()) {
       n.setOnMouseClicked(f -> handleCard(cardNumberField, pinField, n, signIn));
     }
     button.setOnAction(new PinPadView());
-    signIn.setVisible(false);
+    signIn.setDisable(true);
     primaryStage.setScene(scene);
     primaryStage.show();
   }
@@ -128,10 +131,10 @@ public class View extends Application {
     // desired length
     if (cardNumberField.getLength() < 16) {
       cardNumberField.appendText(pinButtonNumber);
-    } else if (pinField.getLength() < 4) {
+    } else if (pinField.getLength() <= 3) {
       pinField.appendText(pinButtonNumber);
     } else {
-      signIn.setVisible(true);
+      signIn.setDisable(false);
     }
     return null;
 
