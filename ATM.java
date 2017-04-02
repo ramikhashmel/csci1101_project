@@ -1,12 +1,11 @@
 import java.util.Scanner;
 
-public class ATM {
-  static Scanner kb = new Scanner(System.in);
-  private static String atmID = "0078P";
+class ATM {
+  static final Scanner kb = new Scanner(System.in);
   private static Controller controller;
 
   public static String getID() {
-    return atmID;
+    return "0078P";
   }
 
   // entry point

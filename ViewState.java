@@ -74,5 +74,5 @@ public enum ViewState {
   CARD_VALID,
 
   // the card could not be read properly
-  CARD_INVALID;
+  CARD_INVALID
 }

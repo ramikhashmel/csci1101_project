@@ -6,10 +6,10 @@ import java.sql.Date;
  * the machine, number of invalid pin code attempts, the amount of money left in the machine after
  * each withdraw or deposit.
  */
-public abstract class Transaction {
+abstract class Transaction {
   // the time that the transaction took place
-  Date transDate;
-  Integer transNumber;
+  private Date transDate;
+  private Integer transNumber;
 
   // the account that the transaction belongs to
   Account acc;

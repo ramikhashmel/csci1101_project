@@ -3,19 +3,19 @@
  */
 import java.util.ArrayList;
 
-public class Model {
+class Model {
   private static boolean isAuthenticated;
-  private ArrayList<Account> accounts;
+  private final ArrayList<Account> accounts;
   private Bank bank;
-  private ArrayList<Card> cards;
+  private final ArrayList<Card> cards;
   private Vault vault;
 
   public Model() {
     // initialize fields
     this.accounts = new ArrayList<>();
     this.bank = new Bank();
-    this.isAuthenticated = false;
-    this.cards = new ArrayList();
+    isAuthenticated = false;
+    this.cards = new ArrayList<>();
     this.vault = new Vault();
 
     // create a test account
@@ -39,7 +39,7 @@ public class Model {
     cards.add(new Card("1234567812341234"));
 
     // fill up vault with twenty twenties
-    ArrayList<Bill> twenties = new ArrayList<Bill>();
+    ArrayList<Bill> twenties = new ArrayList<>();
     for (int i = 0; i < 20; i++) {
       twenties.add(new Bill(20));
     }
@@ -53,7 +53,7 @@ public class Model {
    * @param card The card
    * @return Whether or not if the card is valid
    */
-  public boolean isValidCard(Card card) {
+  private boolean isValidCard(Card card) {
     for (int i = 0; i < getCards().size(); i++) {
       Card dbCards = getCards().get(i);
       if (dbCards.getCardNumber().equals(card.getCardNumber()) && dbCards.getPin().equals(card.getPin())) {
@@ -78,9 +78,9 @@ public class Model {
    * @return The account associated with the card. If no accounts were found, it returns null
    */
   public Account findAccount(Card card) {
-    for (int i = 0; i < accounts.size(); i++) {
-      if (accounts.get(i).getCard().equals(card)) {
-        return accounts.get(i);
+    for (Account account : accounts) {
+      if (account.getCard().equals(card)) {
+        return account;
       }
     }
     return null;
@@ -116,7 +116,7 @@ public class Model {
 
   public void writeTransactionToFile(Transaction trans) {}
 
-  public ArrayList<Card> getCards() {
+  private ArrayList<Card> getCards() {
     return cards;
   }
 }

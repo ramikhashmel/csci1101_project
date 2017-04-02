@@ -3,17 +3,15 @@
  */
 import java.util.ArrayList;
 
-public class UserInput {
+class UserInput {
   /**
    * Asks the user for a number
    * 
    * @param msg The message to ask the user
-   * @param cvvRestriction
+   * @param restriction The restriction
    * @return The number from the user
-   * @throws Exception
    */
-  // TODO: implement restriction
-  public static int getInt(String msg, InputRestriction cvvRestriction) {
+  public static int getInt(String msg, InputRestriction restriction) {
     System.out.print(msg);
     return ATM.kb.nextInt();
   }
@@ -36,8 +34,8 @@ public class UserInput {
    * @param restriction The restriction which is placed on the input
    * @return The input from the user, which satisfies the restriction
    */
-  public static String getString(String msg, InputRestriction restriction) {
-    String input = null;
+  private static String getString(String msg, InputRestriction restriction) {
+    String input;
     do {
       System.out.print(msg);
       input = ATM.kb.nextLine();
@@ -63,7 +61,7 @@ class InputRestriction extends UserInput {
   private Integer minLength = null;
   private String errorMsg = null;
   private boolean ignoreWhitespace = true;
-  private ArrayList<String> options = new ArrayList<String>();
+  private ArrayList<String> options = new ArrayList<>();
 
   /**
    * Checks whether or not the input conforms to the restrictions
@@ -112,7 +110,7 @@ class InputRestriction extends UserInput {
   /**
    * The error message to return if the user did not enter in the right data
    * 
-   * @param errorMsg
+   * @param errorMsg The error message
    */
   public void setErrorMsg(String errorMsg) {
     this.errorMsg = errorMsg;
@@ -134,7 +132,7 @@ class InputRestriction extends UserInput {
    * 
    * @param maxLength The max length of the text (in characters)
    */
-  public void setMaxLength(int maxLength) {
+  void setMaxLength(int maxLength) {
     this.maxLength = maxLength;
   }
 
@@ -143,14 +141,14 @@ class InputRestriction extends UserInput {
    * 
    * @param minLength The minimum length of the text (in characters)
    */
-  public void setMinLength(int minLength) {
+  void setMinLength(int minLength) {
     this.minLength = minLength;
   }
 
   /**
-   * @param shouldBeNumeric
+   * @param shouldBeNumeric Whether or not the input should be numeric
    */
-  public void setShouldBeNumeric(boolean shouldBeNumeric) {
+  void setShouldBeNumeric(boolean shouldBeNumeric) {
     this.shouldBeNumeric = shouldBeNumeric;
   }
 
@@ -174,7 +172,7 @@ class InputRestriction extends UserInput {
     this.options.clear();
   }
 
-  public boolean shouldIgnoreWhitespace() {
+  private boolean shouldIgnoreWhitespace() {
     return ignoreWhitespace;
   }
 

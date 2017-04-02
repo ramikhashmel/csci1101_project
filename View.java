@@ -1,24 +1,15 @@
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.media.AudioClip;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -28,13 +19,13 @@ public class View extends Application {
   static public Controller controller;
   public static Stage primaryStage;
   AudioClip audio;
-  Button button;
+  private Button button;
 
   public static void initialize(String[] args) {
     launch(args);
   }
 
-  Card card;
+  private Card card;
 
   public View() {
     // initializes the GUI window; attaches buttons to methods
@@ -45,9 +36,6 @@ public class View extends Application {
 
   }
 
-  /**
-   * @param model
-   */
   public void askUserForCard() {
     card = new Card();
 
@@ -99,7 +87,7 @@ public class View extends Application {
 
     Button signIn = new Button();
     signIn.setId("goButton");
-    
+
     grid.add(signIn, 0, 4);
 
     final Text actiontarget = new Text();
@@ -114,17 +102,14 @@ public class View extends Application {
 
     // restrict pin pad to four characters
     pinField.setOnKeyReleased(
-        new EventHandler<KeyEvent>() {
-          @Override
-          public void handle(KeyEvent event) {
-            System.out.println(pinField.getText());
-            if (pinField.getText().length() == 4) {
-              signIn.setDisable(false);
-            } else if (pinField.getText().length() > 4) {
-              pinField.setText(pinField.getText().substring(0, 4));
-            } else {
-              signIn.setDisable(true);
-            }
+        event -> {
+          System.out.println(pinField.getText());
+          if (pinField.getText().length() == 4) {
+            signIn.setDisable(false);
+          } else if (pinField.getText().length() > 4) {
+            pinField.setText(pinField.getText().substring(0, 4));
+          } else {
+            signIn.setDisable(true);
           }
         }
     );
@@ -135,7 +120,7 @@ public class View extends Application {
   }
 
 
-  public EventHandler<ActionEvent> handleCard(TextField cardNumberField, PasswordField pinField,
+  private EventHandler<ActionEvent> handleCard(TextField cardNumberField, PasswordField pinField,
       Node n, Button signIn) {
     String pinButtonNumber = ((Button) n).getText();
 
@@ -150,7 +135,7 @@ public class View extends Application {
 
   }
 
-  public void update(ViewState state) {
+  private void update(ViewState state) {
 
   }
 }

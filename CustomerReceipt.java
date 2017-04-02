@@ -6,8 +6,8 @@ import java.util.ArrayList;
  * money is left in the machine, for example. Also thanks the customer for using the ATM.
  */
 
-public class CustomerReceipt {
-  ArrayList<CustomerTransaction> transactions = new ArrayList<CustomerTransaction>();
+class CustomerReceipt {
+  private final ArrayList<CustomerTransaction> transactions = new ArrayList<>();
 
   /**
    * Adds a transaction to the end of the receipt
@@ -22,8 +22,8 @@ public class CustomerReceipt {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("Here's your receipt:\n");
-    for (int i = 0; i < transactions.size(); i++) {
-      sb.append(transactions.get(i).toString());
+    for (CustomerTransaction transaction : transactions) {
+      sb.append(transaction.toString());
     }
 
     sb.append("\nPrinted on: <date today>\nThank you for using " + Utilities.ATMName);

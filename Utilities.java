@@ -4,15 +4,15 @@ import java.util.List;
 import java.util.Random;
 
 
-public abstract class Utilities {
-  static Random rand = new Random();
+abstract class Utilities {
+  private static final Random rand = new Random();
 
   public static final boolean isDebugging = true;
   public static final String ATMName = "Brand New ATM";
 
   // the denominations that the vault can hold
   public static final List<Integer> stdDenominations =
-      new ArrayList<Integer>(Arrays.asList(50, 20, 10, 5));
+      new ArrayList<>(Arrays.asList(50, 20, 10, 5));
 
   /**
    * Generates a random credit card number
@@ -43,7 +43,7 @@ public abstract class Utilities {
    * Returns true based the desired probability
    * 
    * @param prob The probability to return true
-   * @return
+   * @return True on the desired probability amount
    */
   static public boolean randProbability(double prob) {
     // http://stackoverflow.com/questions/11701399/

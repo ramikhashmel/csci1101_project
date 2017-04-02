@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -20,10 +19,10 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class WithdrawCash implements EventHandler<ActionEvent> {
+class WithdrawCash implements EventHandler<ActionEvent> {
 
   private final Account acc;
-  private Controller controller = ATM.getController();
+  private final Controller controller = ATM.getController();
 
   WithdrawCash(Account acc) {
     this.acc = acc;
@@ -37,11 +36,11 @@ public class WithdrawCash implements EventHandler<ActionEvent> {
    * @param withdrawAmt The withdraw amount
    * @return Whether or not the transaction can be completed
    */
-  public WithdrawResult checkIfPossibleToWithdraw(Account acc, float withdrawAmt, Label withdraw) {
+  private WithdrawResult checkIfPossibleToWithdraw(Account acc, float withdrawAmt) {
     WithdrawResult result = new WithdrawResult();
     if (withdrawAmt != (int) withdrawAmt) {
       result.setErrorMessage(String
-          .format("You cannot withdraw coins. However, you can withdraw %d instead.", withdrawAmt));
+          .format("You cannot withdraw coins. However, you can withdraw %f instead.", withdrawAmt));
       return result;
     } else if (controller.getVault().getTotal() < withdrawAmt) {
       result.setErrorMessage("The ATM does not have enough money to service your request.");
@@ -158,16 +157,11 @@ public class WithdrawCash implements EventHandler<ActionEvent> {
 
     returnCard.setOnAction(new ExitScreen());
 
-    if (withdrawAmountField.getLength() != 0) {
-    }
-
     withdrawButton.setOnAction(f -> {
       try {
         withdrawFunds(Float.valueOf(withdrawAmountField.getText()), acc, withdrawAmount);
       } catch (NumberFormatException e1) {
         System.out.println("The number was formatted incorrectly.");
-        e1.printStackTrace();
-      } catch (IOException e1) {
         e1.printStackTrace();
       }
     });
@@ -177,16 +171,15 @@ public class WithdrawCash implements EventHandler<ActionEvent> {
   }
 
 
-  private EventHandler<ActionEvent> withdrawFunds(float withdrawAmt, Account acc,
-      Label withdrawAmount) throws IOException {
+  private void withdrawFunds(float withdrawAmt, Account acc,
+      Label withdrawAmount) {
     if (acc != null) {
-      WithdrawResult result = checkIfPossibleToWithdraw(acc, withdrawAmt, withdrawAmount);
+      WithdrawResult result = checkIfPossibleToWithdraw(acc, withdrawAmt);
       if (result.didSucceed())
         dispenseCash(withdrawAmt, result);
       else
         withdrawAmount.setText(result.getErrorMessage());
     }
-    return null;
   }
 
   private void dispenseCash(float withdrawAmt, WithdrawResult result) {

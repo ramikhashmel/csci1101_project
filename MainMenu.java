@@ -20,7 +20,7 @@ final class MainMenu implements EventHandler<ActionEvent> {
   private final TextField cardNumberField;
   private final PasswordField pinField;
   private final Text actiontarget;
-  private Controller controller = ATM.getController();
+  private final Controller controller = ATM.getController();
 
   public static Scene mainMenu;
 
@@ -96,7 +96,7 @@ final class MainMenu implements EventHandler<ActionEvent> {
       cashWithdraw.setOnAction(new WithdrawCash(acc));
       primaryStage.setScene(scene);
       primaryStage.show();
-      fastCash.setOnAction(j -> fashCashView());
+      fastCash.setOnAction(j -> fastCashView());
       returnCard.setOnAction(h -> System.exit(0));
 
 
@@ -111,19 +111,18 @@ final class MainMenu implements EventHandler<ActionEvent> {
     MainMenu.mainMenu = scene;
   }
 
-  private Object fashCashView() {
+  private Object fastCashView() {
     // TODO Auto-generated method stub
     return null;
   }
 
   /**
    * Verifies if the card is valid or not
-   * 
-   * @param cardNumberField The card number
+   *  @param cardNumberField The card number
    * @param pinField The pin
    * @param actiontarget What text field to update
    */
-  private boolean verifyCard(final TextField cardNumberField, final PasswordField pinField,
+  private void verifyCard(final TextField cardNumberField, final PasswordField pinField,
       final Text actiontarget) {
     actiontarget.setFill(Color.BLACK);
 
@@ -134,16 +133,15 @@ final class MainMenu implements EventHandler<ActionEvent> {
       // card is invalid; clear pin and card number fields
       cardNumberField.clear();
       pinField.clear();
+      assert event != null;
       if (event.getMessage() != null) {
         actiontarget.setText(event.getMessage());
       }
       controller.setAuthenticated(false);
-      return false;
     } else {
       // card is valid
       actiontarget.setText(event.getMessage());
       controller.setAuthenticated(true);
-      return true;
     }
   }
 }

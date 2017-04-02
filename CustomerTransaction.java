@@ -1,8 +1,8 @@
 public class CustomerTransaction extends Transaction {
   // i.e. withdraw or deposit
-  String typeOfTrans = "";
+  private String typeOfTrans = "";
 
-  float amount = 0;
+  private float amount = 0;
 
   public Account getAcc() {
     return acc;

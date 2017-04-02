@@ -3,14 +3,14 @@
  * used in the vault.
  */
 public class Bill {
-  private int amount;
+  private final int amount;
 
   private enum CurrencyType {
     CAD, US
-  };
+  }
 
   private CurrencyType currency;
-  private int serialNumber;
+  private final int serialNumber;
   private boolean isTorn;
 
   @Override
@@ -33,7 +33,7 @@ public class Bill {
     return amount;
   }
 
-  public String getCurrency() {
+  private String getCurrency() {
     return currency.toString();
   }
 

@@ -5,19 +5,19 @@ import java.util.Iterator;
 import java.util.ListIterator;
 
 public class Vault {
-  private ArrayList<Bill> fives = new ArrayList<>();
-  private ArrayList<Bill> tens = new ArrayList<>();
-  private ArrayList<Bill> twenties = new ArrayList<>();
-  private ArrayList<Bill> fifties = new ArrayList<>();
+  private final ArrayList<Bill> fives = new ArrayList<>();
+  private final ArrayList<Bill> tens = new ArrayList<>();
+  private final ArrayList<Bill> twenties = new ArrayList<>();
+  private final ArrayList<Bill> fifties = new ArrayList<>();
 
-  public ListIterator<Bill> getFifties(int amt) {
+  private ListIterator<Bill> getFifties(int amt) {
     if (fifties.size() * 50 >= amt) {
       return fifties.listIterator(fifties.size() - amt);
     }
     return null;
   }
 
-  public ListIterator<Bill> getFives(int amt) {
+  private ListIterator<Bill> getFives(int amt) {
     if (fives.size() * 5 >= amt) {
       return fives.listIterator(fives.size() - amt);
     }
@@ -40,7 +40,7 @@ public class Vault {
     return twenties.size();
   }
 
-  public ListIterator<Bill> getTens(int amt) {
+  private ListIterator<Bill> getTens(int amt) {
     if (tens.size() * 10 >= amt) {
       return tens.listIterator(tens.size() - amt);
     }
@@ -50,13 +50,13 @@ public class Vault {
   /**
    * Gets the total dollar value of all of the bills in the vault
    * 
-   * @return
+   * @return The dollar value of the entire contents of the vault
    */
   public int getTotal() {
     return (fives.size() * 5 + tens.size() * 10 + twenties.size() * 20 + fifties.size() * 50);
   }
 
-  public ListIterator<Bill> getTwenties(int amt) {
+  private ListIterator<Bill> getTwenties(int amt) {
     if (twenties.size() * 20 >= amt) {
       return twenties.listIterator(twenties.size() - amt);
     }

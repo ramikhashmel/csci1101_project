@@ -1,6 +1,6 @@
 public class Controller {
-  View view;
-  Model model;
+  private View view;
+  private Model model;
   CustomerReceipt custReceipt = new CustomerReceipt();
 
   public void addModel(Model model) {

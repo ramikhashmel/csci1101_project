@@ -5,10 +5,10 @@
 import java.util.ArrayList;
 
 public class Bank {
-  ArrayList<Account> accounts = new ArrayList<Account>();
-  String bankName;
-  int bankNumber;
-  int branchCode;
+  private ArrayList<Account> accounts = new ArrayList<>();
+  private String bankName;
+  private int bankNumber;
+  private int branchCode;
 
   public ArrayList<Account> getAccounts() {
     return accounts;
@@ -42,15 +42,4 @@ public class Bank {
     this.branchCode = branchCode;
   }
 
-  /**
-
-   * Transfers the money from one account to another one
-   */
-  /**
-   * @param source The source account
-   * @param dest The destination account
-   */
-  public void transfer(Account source, Account dest) {
-
-  }
 }

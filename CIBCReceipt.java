@@ -2,15 +2,14 @@
  * Creates different types of receipts for different banks
  */
 import java.text.SimpleDateFormat;
-import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class CIBCReceipt implements ReceiptFormatter {
 
   private final SimpleDateFormat dateFormat;
   private String machineID = null;
-  private Date date;
-  private String appID = "";
+  private final Date date;
   private TransactionType transType;
   private Account acc;
   private Transaction trans;
@@ -19,7 +18,7 @@ public class CIBCReceipt implements ReceiptFormatter {
   public CIBCReceipt() {
     this.machineID = String.valueOf(Utilities.randNumber(1000, 9999));
     this.date = new Date();
-    this.appID = String.valueOf(Utilities.randNumber(1000,9999));
+    String appID = String.valueOf(Utilities.randNumber(1000, 9999));
     this.refNumber = Utilities.randNumber(100000,9999999);
 
     // e.g. MAR28 17 AT 16:20
@@ -51,21 +50,19 @@ public class CIBCReceipt implements ReceiptFormatter {
   }
 
   public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("Hi ").append(acc.getName().toUpperCase()).append("\n\n");
-    sb.append("Here is your recent ATM transaction receipt.\n\n");
-    sb.append("MACHINE ID  ").append(this.getMachineID()).append("\n\n");
-    sb.append("CARD NUMBER ").append(acc.getCard().getCardNumber().toString()).append("\n\n");
-    sb.append(dateFormat.format(date));
-    sb.append(":").append(date.getMinutes()).append("   REF # " + this.getRefNumber());
-    sb.append("\n\n");
-    sb.append(this.getTransType().toString()).append("   $").append(this.trans.getAmount());
-    sb.append("\n\n");
-    sb.append("FROM CHEQUING   ").append(this.acc.getAccountNumber()).append("\n\n");
-    sb.append("ACCOUNT BALANCE $").append(this.acc.getBalance()).append("\n\n");
-    sb.append("DAILY CANADIAN CASH LIMIT").append("\n");
-    sb.append("REMAINING   $").append(this.acc.getRemainingDailyWithdrawLimit());
-    return sb.toString();
+    return "Hi " + acc.getName().toUpperCase() + "\n\n" +
+        "Here is your recent ATM transaction receipt.\n\n" +
+        "MACHINE ID  " + this.getMachineID() + "\n\n" +
+        "CARD NUMBER " + acc.getCard().getCardNumber() + "\n\n" +
+        dateFormat.format(date) +
+        ":" + Calendar.getInstance().get(Calendar.MINUTE) + "   REF # " + this.getRefNumber() +
+        "\n\n" +
+        this.getTransType().toString() + "   $" + this.trans.getAmount() +
+        "\n\n" +
+        "FROM CHEQUING   " + this.acc.getAccountNumber() + "\n\n" +
+        "ACCOUNT BALANCE $" + this.acc.getBalance() + "\n\n" +
+        "DAILY CANADIAN CASH LIMIT" + "\n" +
+        "REMAINING   $" + this.acc.getRemainingDailyWithdrawLimit();
   }
 
   private int getRefNumber() {
