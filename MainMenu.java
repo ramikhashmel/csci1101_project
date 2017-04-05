@@ -53,7 +53,7 @@ final class MainMenu implements EventHandler<ActionEvent> {
       grid.setVgap(10);
       grid.setPadding(new Insets(25, 25, 25, 25));
 
-      Scene scene = new Scene(grid, 600, 400);
+      Scene scene = new Scene(grid, 640, 480);
 
       BorderPane border = new BorderPane();
       border.setPadding(new Insets(20, 0, 20, 20));
