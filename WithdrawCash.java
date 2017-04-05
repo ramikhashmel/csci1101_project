@@ -193,7 +193,14 @@ class WithdrawCash implements EventHandler<ActionEvent> {
         billsIter.remove();
       }
     }
-    playAudioFromURL("https://www.freesound.org/data/previews/41/41195_266274-lq.mp3");
+
+    // play withdraw sound
+    try {
+      playAudioFromURL("withdraw.mp3");
+    } catch (Exception e) {
+      // in case the file gets moved, or is deleted for some weird reason
+      System.out.println("The audio file could not be played.");
+    }
 
     System.out.println("Money dispensed.");
     View.primaryStage.setScene(MainMenu.mainMenu);
