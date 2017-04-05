@@ -79,7 +79,7 @@ public class View extends Application {
     grid.add(pinPad, 0, 10);
 
     final TextField cardNumberField = new TextField();
-    //grid.add(cardNumberField, 1, 1);
+    grid.add(cardNumberField, 1, 1);
 
     final PasswordField pinField = new PasswordField();
     grid.add(pinField, 0, 3);
