@@ -22,7 +22,7 @@ class Model {
     Account acc = new Account();
     acc.setAccountNumber(12345);
     acc.setBalance(1000);
-    acc.setCard(new Card("1234567812341234"));
+    acc.setCard(new Card("1234567812341234", 000, "1234", "Bob Jones"));
     acc.setName("Bob Jones");
     accounts.add(acc);
 
@@ -56,7 +56,7 @@ class Model {
   private boolean isValidCard(Card card) {
     for (int i = 0; i < getCards().size(); i++) {
       Card dbCards = getCards().get(i);
-      if (dbCards.getCardNumber().equals(card.getCardNumber()) && dbCards.getPin().equals(card.getPin())) {
+      if (dbCards.equals(card)) {
         return true;
       }
     }
