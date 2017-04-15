@@ -12,6 +12,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import java.io.File;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 // http://www.austintek.com/mvc/#austintek_mvc.view_2
 
@@ -19,6 +22,7 @@ public class View extends Application {
   static public Controller controller;
   public static Stage primaryStage;
   AudioClip audio;
+  MediaPlayer mediaPlayer;
   private Button button;
 
   public static void initialize(String[] args) {
@@ -123,6 +127,71 @@ public class View extends Application {
   private EventHandler<ActionEvent> handleCard(TextField cardNumberField, PasswordField pinField,
       Node n, Button signIn) {
     String pinButtonNumber = ((Button) n).getText();
+      
+      if(pinButtonNumber == "1") {
+          String one = "one.mp3";
+          Media hit = new Media(new File(one).toURI().toString());
+          mediaPlayer = new MediaPlayer(hit);
+          
+          mediaPlayer.play();
+      }
+      else if (pinButtonNumber == "2") {
+          String two = "two.mp3";
+          Media hit2 = new Media(new File(two).toURI().toString());
+          mediaPlayer = new MediaPlayer(hit2);
+          
+          mediaPlayer.play();
+      }
+      else if (pinButtonNumber == "3") {
+          String three = "three.mp3";
+          Media hit3 = new Media(new File(three).toURI().toString());
+          mediaPlayer = new MediaPlayer(hit3);
+          
+          mediaPlayer.play();
+      }
+      else if (pinButtonNumber == "4") {
+          String four = "four.mp3";
+          Media hit4 = new Media(new File(four).toURI().toString());
+          mediaPlayer = new MediaPlayer(hit4);
+          
+          mediaPlayer.play();
+      }
+      else if (pinButtonNumber == "5") {
+          String five = "five.mp3";
+          Media hit5 = new Media(new File(five).toURI().toString());
+          mediaPlayer = new MediaPlayer(hit5);
+          
+          mediaPlayer.play();
+      }
+      else if (pinButtonNumber == "6") {
+          String six = "six.mp3";
+          Media hit6 = new Media(new File(six).toURI().toString());
+          mediaPlayer = new MediaPlayer(hit6);
+          
+          mediaPlayer.play();
+      }
+      else if (pinButtonNumber == "7") {
+          String seven = "seven.mp3";
+          Media hit7 = new Media(new File(seven).toURI().toString());
+          mediaPlayer = new MediaPlayer(hit7);
+          
+          mediaPlayer.play();
+      }
+      else if (pinButtonNumber == "8") {
+          String eight = "eight.mp3";
+          Media hit8 = new Media(new File(eight).toURI().toString());
+          mediaPlayer = new MediaPlayer(hit8);
+          
+          mediaPlayer.play();
+      }
+      else if (pinButtonNumber == "9") {
+          String nine = "nine.mp3";
+          Media hit9 = new Media(new File(nine).toURI().toString());
+          mediaPlayer = new MediaPlayer(hit9);
+          
+          mediaPlayer.play();
+      }
+
 
     // keep the sign in button disabled if the pin is not
     // long enough
