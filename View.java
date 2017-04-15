@@ -1,3 +1,4 @@
+import java.util.Objects;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -128,63 +129,99 @@ public class View extends Application {
       Node n, Button signIn) {
     String pinButtonNumber = ((Button) n).getText();
       
+<<<<<<< HEAD
       if(pinButtonNumber == "1") {
+=======
+      if(Objects.equals(pinButtonNumber, "1")) {
+>>>>>>> 62fd73181f903901d0fba52936cd97b23cf5d831
           String one = "one.mp3";
           Media hit = new Media(new File(one).toURI().toString());
           mediaPlayer = new MediaPlayer(hit);
           
           mediaPlayer.play();
       }
+<<<<<<< HEAD
       else if (pinButtonNumber == "2") {
+=======
+      else if (Objects.equals(pinButtonNumber, "2")) {
+>>>>>>> 62fd73181f903901d0fba52936cd97b23cf5d831
           String two = "two.mp3";
           Media hit2 = new Media(new File(two).toURI().toString());
           mediaPlayer = new MediaPlayer(hit2);
           
           mediaPlayer.play();
       }
+<<<<<<< HEAD
       else if (pinButtonNumber == "3") {
+=======
+      else if (Objects.equals(pinButtonNumber, "3")) {
+>>>>>>> 62fd73181f903901d0fba52936cd97b23cf5d831
           String three = "three.mp3";
           Media hit3 = new Media(new File(three).toURI().toString());
           mediaPlayer = new MediaPlayer(hit3);
           
           mediaPlayer.play();
       }
+<<<<<<< HEAD
       else if (pinButtonNumber == "4") {
+=======
+      else if (Objects.equals(pinButtonNumber, "4")) {
+>>>>>>> 62fd73181f903901d0fba52936cd97b23cf5d831
           String four = "four.mp3";
           Media hit4 = new Media(new File(four).toURI().toString());
           mediaPlayer = new MediaPlayer(hit4);
           
           mediaPlayer.play();
       }
+<<<<<<< HEAD
       else if (pinButtonNumber == "5") {
+=======
+      else if (Objects.equals(pinButtonNumber, "5")) {
+>>>>>>> 62fd73181f903901d0fba52936cd97b23cf5d831
           String five = "five.mp3";
           Media hit5 = new Media(new File(five).toURI().toString());
           mediaPlayer = new MediaPlayer(hit5);
           
           mediaPlayer.play();
       }
+<<<<<<< HEAD
       else if (pinButtonNumber == "6") {
+=======
+      else if (Objects.equals(pinButtonNumber, "6")) {
+>>>>>>> 62fd73181f903901d0fba52936cd97b23cf5d831
           String six = "six.mp3";
           Media hit6 = new Media(new File(six).toURI().toString());
           mediaPlayer = new MediaPlayer(hit6);
           
           mediaPlayer.play();
       }
+<<<<<<< HEAD
       else if (pinButtonNumber == "7") {
+=======
+      else if (Objects.equals(pinButtonNumber, "7")) {
+>>>>>>> 62fd73181f903901d0fba52936cd97b23cf5d831
           String seven = "seven.mp3";
           Media hit7 = new Media(new File(seven).toURI().toString());
           mediaPlayer = new MediaPlayer(hit7);
           
           mediaPlayer.play();
       }
+<<<<<<< HEAD
       else if (pinButtonNumber == "8") {
+=======
+      else if (Objects.equals(pinButtonNumber, "8")) {
+>>>>>>> 62fd73181f903901d0fba52936cd97b23cf5d831
           String eight = "eight.mp3";
           Media hit8 = new Media(new File(eight).toURI().toString());
           mediaPlayer = new MediaPlayer(hit8);
           
           mediaPlayer.play();
       }
+<<<<<<< HEAD
       else if (pinButtonNumber == "9") {
+=======
+      else if (Objects.equals(pinButtonNumber, "9")) {
+>>>>>>> 62fd73181f903901d0fba52936cd97b23cf5d831
           String nine = "nine.mp3";
           Media hit9 = new Media(new File(nine).toURI().toString());
           mediaPlayer = new MediaPlayer(hit9);
